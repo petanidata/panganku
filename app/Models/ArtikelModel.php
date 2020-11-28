@@ -6,7 +6,7 @@ class ArtikelModel extends Model
 {
     protected $table      = 'artikel';
     protected $primaryKey = 'id_artikel';
-    protected $useTimestamps = false;
+    protected $useTimestamps = true;
     public function getArtikel($id_artikel=false)
     {
      if ($id_artikel == false){

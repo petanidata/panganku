@@ -55,14 +55,16 @@ class Recipe extends BaseController
 	{
 		//dd($this->request->getVar());
 		$this->resepModel->save([
+			'id_user' => $this->request->getVar('id_user'),
 			'judul' => $this->request->getVar('judul'),
 			'porsi' => $this->request->getVar('porsi'),
 			'lama_memasak' => $this->request->getVar('lama_memasak'),
 			'bahan' => $this->request->getVar('bahan'),
 			'tutorial' => $this->request->getVar('tutorial'),
 			'gambar_banner' => $this->request->getVar('gambar_banner'),
-			'gambar_tutorial' => $this->request->getVar('gambar_tutorial'),
+			'gambar_tutorial' => $this->request->getVar('gambar_tutorial')
 		]);
+		session()->setFlashdata('pesan', 'Resep Berhasil Disimpan.');
 		return redirect()->to(base_url('/recipe'));
 	}
 

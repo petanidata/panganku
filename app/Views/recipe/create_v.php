@@ -8,10 +8,12 @@
     <div class="w-100">
     <form action="/recipe/save" method="post">
     <?= csrf_field(); ?>
+<!-- user sementara-->    <input type="hidden" class="form-control" id="id_user" name="id_user" value="1">
         <div class="form-group row">
             <label for="judul" class="col-sm-2" >Nama Makanan</label>
+            
             <div class="col-sm-10">
-                <input type="type" class="form-control" id="judul" name="judul" placeholder="masukan judul masakan anda disini" autofocus>
+                <input type="text" class="form-control" id="judul" name="judul" placeholder="masukan judul masakan anda disini" autofocus>
             </div>
         </div>
         <div class="form-group row">

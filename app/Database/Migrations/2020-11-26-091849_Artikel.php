@@ -9,19 +9,19 @@ class Artikel extends Migration
 	{
 		$this->forge->addField([
 			'id_artikel'          => [
-				'type'           	 => 'VARCHAR',
-				'constraint'     	 => '10',
-				'auto_increment' 	 => true,
+				'type'         	 => 'INT',
+				'unsigned'		 => true,
+				'null'			 => false,		
+                'auto_increment' => true
 			],
 			'id_user'          => [
-					'type'           => 'VARCHAR',
-					'constraint'     => '20',
-					'default'		 => 'id_user'
+					'type'           => 'INT',
+					'unsigned'		 => true
 			],
 			'judul'          => [
 				'type'         		 => 'VARCHAR',
 				'constraint'    	 => '100',
-				'default'		 => 'judul'
+				'default'		 	 => 'judulnya'
 			],
 			'isi' => [
 					'type'           => 'TEXT',	

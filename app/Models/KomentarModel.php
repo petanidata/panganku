@@ -6,7 +6,7 @@ class KomentarModel extends Model
 {
     protected $table      = 'komentar';
     protected $primaryKey = 'id_komentar';
-    protected $useTimestamps = false;
+    protected $useTimestamps = true;
     public function getKomentar($id_resep)
     {
         return $this->join('user','user.id_user=komentar.id_user')

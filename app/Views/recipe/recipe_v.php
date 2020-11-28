@@ -17,6 +17,11 @@
     <div class="container">
         <div class="section-title text-center">
             <input type="text" placeholder="cari resep">
+            <?php if(session()->getFlashData('pesan')) :?>
+              <div class="alert alert-success" role="alert">
+                <?= session()->getFlashData('pesan') ?>
+              </div>
+            <?php endif;?>
         </div>
     </div>
     <div class="container">

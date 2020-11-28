@@ -9,18 +9,18 @@ class Komentar extends Migration
 	{
 		$this->forge->addField([
 			'id_komentar'          => [
-				'type'           	 => 'VARCHAR',
-				'constraint'     	 => '10',
-				'auto_increment' 	 => true,
+				'type'           	 => 'INT',
+				'unsigned'		=> true,
+				'null'			 => false,		
+                'auto_increment' => true
 			],
 			'id_user'          => [
-					'type'           => 'VARCHAR',
-					'constraint'     => '20',
-					'default'		 => 'id_user'
+				'type'           	 => 'INT',
+				'unsigned'		 => true,
 			],
 			'id_resep'          => [
-				'type'         		 => 'VARCHAR',
-				'constraint'    	 => '10'
+				'type'           	 => 'INT',
+				'unsigned'		 => true,
 			],
 			'waktu_komen'       => [
 					'type'           => 'DATETIME',					
