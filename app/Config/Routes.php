@@ -37,6 +37,8 @@ $routes->get('/article/(:segment)','Article::detail/$1');
 $routes->get('/recipe/(:segment)','Recipe::detail/$1');
 $routes->delete('/recipe/(:segment)','Recipe::delete/$1');
 $routes->get('/recipe/edit/(:segment)','Recipe::edit/$1');
+$routes->get('/login','User::login');
+$routes->get('/register','User::register');
 
 
 

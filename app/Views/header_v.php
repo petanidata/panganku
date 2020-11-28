@@ -47,7 +47,7 @@
           <li><a href=<?php echo base_url('recipe'); ?>>Recipe</a></li>
           <li><a href=<?php echo base_url('article'); ?>>Article</a></li>
           <li><a href=<?php echo base_url('team'); ?>>Team</a></li>
-          <a href="#get-started" class="btn-login">Login</a>
+          <a href="<?php echo base_url('login'); ?>" class="btn-login">Login</a>
         </ul>
       </nav><!-- #nav-menu-container -->
     </div>

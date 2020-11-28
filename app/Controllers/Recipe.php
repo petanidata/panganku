@@ -12,6 +12,7 @@ class Recipe extends BaseController
 	}
 	public function index()
 	{
+		
 		$title = [
 			'title' => 'Resep | Panganku'
 		];
