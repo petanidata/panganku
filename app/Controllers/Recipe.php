@@ -57,7 +57,7 @@ class Recipe extends BaseController
 	}
 	public function save()
 	{
-		//dd($this->request->getVar());
+		//  dd($this->request->getVar());
 		if(!$this->validate([
 			'judul' => ['rules'=>'required',
 						'errors'=>[ 'required'=> ' Harus diisi']
@@ -75,26 +75,46 @@ class Recipe extends BaseController
 			   			],
 			'tutorial' => ['rules'=>'required',
 							'errors'=>[ 'required'=> 'Cara Memasak Harus diisi']
-			   			  ],
-			'gambar_banner' => ['rules'=>'required',
-								'errors'=>[ 'required'=> 'Gambar Banner Harus diisi']
-								],
+							 ],
+			'gambar_banner' =>['rules'=>'uploaded[gambar_banner]|is_image[gambar_banner]|mime_in[gambar_banner,image/jpg,image/jpeg,image/png]',
+							   'errors'=>[ 'uploaded'	=> 'Gambar Banner harus diisi',
+											'is_image'	=> 'File harus berupa gambar',
+											'mime_in'	=> 'File berformat jpg/jpeg/png']
+							 ],
+			'gambar_tutorial' =>['rules'=>'is_image[gambar_banner]|mime_in[gambar_banner,image/jpg,image/jpeg,image/png',
+								'errors'=>['is_image'	=> 'File harus berupa gambar',
+											'mime_in'	=> 'File berformat jpg/jpeg/png']
+						   		],
+
 		])) {
-			$validation = \Config\Services::validation();
-			return redirect()->to(base_url('/recipe/create'))->withInput()->
-			with('validation',$validation);
+			// $validation = \Config\Services::validation();
+			// return redirect()->to(base_url('/recipe/create'))->withInput()->with('validation',$validation);
+			return redirect()->to(base_url('/recipe/create'))->withInput();
 		}
+		// ambil gambar
+		$fileBanner = $this->request->getFile('gambar_banner');
+		$fileTutorial = $this->request->getFile('gambar_tutorial');
+		dd($fileTutorial);
 
-
+		//pake nama random
+		$namaBanner = $fileBanner->getRandomName();
+		$namaTutorial = $fileTutorial->getRandomName();
+		//pindahin
+		$fileBanner->move('img/recipe/', $namaBanner);
+		$fileTutorial->move('img/recipe/', $namaTutorial);
+		
+		// dd($fileBanner);
 		$this->resepModel->save([
-			'id_user' => $this->request->getVar('id_user'),
-			'judul' => $this->request->getVar('judul'),
-			'porsi' => $this->request->getVar('porsi'),
-			'lama_memasak' => $this->request->getVar('lama_memasak'),
-			'bahan' => $this->request->getVar('bahan'),
-			'tutorial' => $this->request->getVar('tutorial'),
-			'gambar_banner' => $this->request->getVar('gambar_banner'),
-			'gambar_tutorial' => $this->request->getVar('gambar_tutorial')
+			'id_user' 		=> $this->request->getVar('id_user'),
+			'judul' 		=> $this->request->getVar('judul'),
+			'porsi' 		=> $this->request->getVar('porsi'),
+			'lama_memasak'	=> $this->request->getVar('lama_memasak'),
+			'bahan' 		=> $this->request->getVar('bahan'),
+			'tutorial' 		=> $this->request->getVar('tutorial'),
+			'gambar_banner' => $namaBanner,
+			'gambar_tutorial' => $namaTutorial
+			
+						
 		]);
 		session()->setFlashdata('pesan', 'Resep Berhasil Disimpan.');
 		return redirect()->to(base_url('/recipe'));
@@ -138,10 +158,28 @@ class Recipe extends BaseController
 		'tutorial' => ['rules'=>'required',
 						'errors'=>[ 'required'=> 'Cara Memasak Harus diisi']
 						 ],
+
 	])) {
-		$validation = \Config\Services::validation();
-		return redirect()->to(base_url('/recipe/edit/'.$id_resep))->withInput()->with('validation',$validation);
+		// $validation = \Config\Services::validation();
+		// return redirect()->to(base_url('/recipe/edit/'.$id_resep))->withInput()->with('validation',$validation);
+		return redirect()->to(base_url('/recipe/edit/'.$id_resep))->withInput();
 	}
+
+	if (!empty($this->request->getFile('gambar_banner'))) {
+		$fileBanner = $this->request->getFile('gambar_banner');
+		$namaBanner = $fileBanner->getRandomName();
+		$fileBanner->move('img/recipe/',$namaBanner);
+	} else {
+		$namaBanner = $this->request->getVar('$gambar_banner_old');
+	}
+		//getFile
+		$fileTutorial = $this->request->getFile('gambar_tutorial');
+		// dd($fileBanner);
+
+		//pake nama random
+		$namaTutorial = $fileTutorial->getRandomName();
+		//pindahin
+		$fileTutorial->move('img/recipe/', $namaTutorial);
 		
 		//dd($this->request->getVar());
 		$this->resepModel->save([
@@ -152,8 +190,8 @@ class Recipe extends BaseController
 			'lama_memasak' => $this->request->getVar('lama_memasak'),
 			'bahan' => $this->request->getVar('bahan'),
 			'tutorial' => $this->request->getVar('tutorial'),
-			'gambar_banner' => $this->request->getVar('gambar_banner'),
-			'gambar_tutorial' => $this->request->getVar('gambar_tutorial')
+			'gambar_banner' => $namaBanner,
+			'gambar_tutorial' => $namaTutorial
 		]);
 		session()->setFlashdata('pesan', 'Resep Berhasil Diubah.');
 		return redirect()->to(base_url('/recipe/'.$id_resep));

@@ -35,7 +35,7 @@
       <?php $i = 1; foreach ($resep as $r) { ?>
         <div class="col-md-6 col-lg-4 my-2">
           <div class="card w-100">
-            <img src="<?php echo base_url($r['gambar_banner']); ?>" alt="img<?= $i++; ?>" width="100%">
+            <img src="<?php echo base_url('img/recipe/'.$r['gambar_banner']); ?>" alt="img<?= $i++; ?>" width="100%">
             <h4><?= $r['judul']; ?></h4>
             oleh <b><?= $r['username']; ?></b><br>
             <b>Bahan Bahan:</b>

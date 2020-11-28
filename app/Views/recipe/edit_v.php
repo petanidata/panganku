@@ -60,30 +60,31 @@
             </div>
 
         </div>
+
         <div class="form-group row">
             <label for="gambar_banner" class="col-sm-2">Masukkan Gambar banner <br><p color=red>*wajib diisi</p></label>
             <div class="col-sm-10">
-                <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="gambar_banner" name="gambar_banner">
+                <div class="form-control">
+                <input type="hidden" name="gambar_banner_old" value="<?= $resep['gambar_banner']?>">
+                    <input type="file" class="form-control-file <?= ($validation->hasError('gambar_banner')) ? 'is-invalid' : '' ;?>" id="gambar_banner" name="gambar_banner">
                     <div class="invalid-feedback">
                         <?=$validation->getError('gambar_banner');?>
                     </div>
-                    <label class="custom-file-label" for="gambar_banner">Pilih Gambar Banner...</label>
                 </div>
             </div>
         </div>
         <div class="form-group row">
             <label for="gambar_tutorial" class="col-sm-2">Masukkan Gambar Tutorial <br><p color=red>(jika ada)</p></label>
             <div class="col-sm-10">
-                <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="gambar_tutorial" name="gambar_tutorial">
+                <div class="form-control">
+                    <input type="hidden" name="gambar_tutorial_old" value="<?= $resep['gambar_tutorial']?>">
+                    <input type="file" class="form-control-file <?= ($validation->hasError('gambar_tutorial')) ? 'is-invalid' : '' ;?>" id="gambar_tutorial" name="gambar_tutorial">
                     <div class="invalid-feedback">
-                        <?=$validation->getError('ggambar_tutorial');?>
+                        <?=$validation->getError('gambar_tutorial');?>
                     </div>
-                    <label class="custom-file-label" for="gambar_tutorial">Pilih Gambar Tutorial...</label>
                 </div>
             </div>
-        </div>
+        </div
         <div class="text-center">
         <button type="submit" class="btn btn-success" >Ubah Resep</button>
         <a href="<?=base_url('/recipe/'.$resep['id_resep']);?>"  class="btn btn-primary" >Batal Simpan</a>

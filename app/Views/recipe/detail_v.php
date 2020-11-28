@@ -34,7 +34,7 @@
       <div class="row text-center align-self-center">
         <div class="col-md-12 col-lg-12">
           <div class="feature-block w-100">
-            <img src="<?php echo base_url($resep['gambar_banner']); ?>" alt="artikel1" width="75%">
+            <img src="<?php echo base_url('/img/recipe/'.$resep['gambar_banner']); ?>" alt="artikel1" width="75%">
             <H4> Bahan - Bahan </h4>
             <h5 ><?= nl2br($resep['bahan']);?></h5>
             <br />
