@@ -63,6 +63,7 @@ class Recipe extends BaseController
 			'gambar_banner' => $this->request->getVar('gambar_banner'),
 			'gambar_tutorial' => $this->request->getVar('gambar_tutorial'),
 		]);
+		return redirect()->to(base_url('/recipe'));
 	}
 
 

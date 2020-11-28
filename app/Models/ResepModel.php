@@ -7,6 +7,7 @@ class ResepModel extends Model
     protected $table      = 'resep';
     protected $primaryKey = 'id_resep';
     protected $useTimestamps = false;
+    protected $allowedFields = ['judul','porsi','lama_memasak','bahan','tutorial','gambar_banner','gambar_tutorial'];
     public function getResep($id_resep = false)
     {
      if ($id_resep == false){
