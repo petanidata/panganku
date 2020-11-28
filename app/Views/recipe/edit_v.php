@@ -6,7 +6,7 @@
   </div>
   <div class="row text-left align-self-left">
     <div class="w-100">
-    <form action="/recipe/update/<?= $resep['id_resep'];?>" method="post">
+    <form action="/recipe/update/<?= $resep['id_resep'];?>" method="post" enctype="multipart/form-data">
     <?= csrf_field(); ?>
 <!-- user sementara-->    
 <input type="hidden" class="form-control" id="id_user" name="id_user" value="1">
@@ -63,23 +63,30 @@
         <div class="form-group row">
             <label for="gambar_banner" class="col-sm-2">Masukkan Gambar banner <br><p color=red>*wajib diisi</p></label>
             <div class="col-sm-10">
-                <input type="file" class="form-control <?= ($validation->hasError('gambar_banner')) ? 'is-invalid' : '' ;?>" id="gambar_banner" name="gambar_banner">
-                <div class="invalid-feedback">
-                    <?=$validation->getError('gambar_banner');?>
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="gambar_banner" name="gambar_banner">
+                    <div class="invalid-feedback">
+                        <?=$validation->getError('gambar_banner');?>
+                    </div>
+                    <label class="custom-file-label" for="gambar_banner">Pilih Gambar Banner...</label>
                 </div>
             </div>
-
         </div>
         <div class="form-group row">
             <label for="gambar_tutorial" class="col-sm-2">Masukkan Gambar Tutorial <br><p color=red>(jika ada)</p></label>
             <div class="col-sm-10">
-                <input type="file" class="form-control" id="gambar_tutorial" name="gambar_tutorial">
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="gambar_tutorial" name="gambar_tutorial">
+                    <div class="invalid-feedback">
+                        <?=$validation->getError('ggambar_tutorial');?>
+                    </div>
+                    <label class="custom-file-label" for="gambar_tutorial">Pilih Gambar Tutorial...</label>
+                </div>
             </div>
         </div>
         <div class="text-center">
         <button type="submit" class="btn btn-success" >Ubah Resep</button>
-        <?php //$x= '/recipe' , $resep['id_resep'];?>
-        <!--<a href="<?=base_url("/recipe/{$x}");?>"  class="btn btn-primary" >Batal Simpan</a>-->
+        <a href="<?=base_url('/recipe/'.$resep['id_resep']);?>"  class="btn btn-primary" >Batal Simpan</a>
         </div>
         </form>
     </div>

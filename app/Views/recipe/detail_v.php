@@ -6,7 +6,15 @@
   ============================-->
 
   <section id="features" class="padd-section text-center wow fadeInUp">
-
+  <div class="container">
+        <div class="section-title text-center">
+            <?php if(session()->getFlashData('pesan')) :?>
+              <div class="alert alert-success" role="alert">
+                <?= session()->getFlashData('pesan') ?>
+              </div>
+            <?php endif;?>
+        </div>
+    </div>
     <div class="container">
     <div class="d-flex">
         <a href="/recipe" class="btn btn-success"> Kembali ke resep</a>

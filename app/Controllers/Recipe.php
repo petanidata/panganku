@@ -118,6 +118,47 @@ class Recipe extends BaseController
 		echo view('recipe/edit_v', $data);
 		echo view('footer_v');
 	}
+	public function update($id_resep)
+	{
+		if(!$this->validate([
+		'judul' => ['rules'=>'required',
+					'errors'=>[ 'required'=> ' Harus diisi']
+				   ],
+		'porsi' => ['rules'=>'required',
+					'errors'=>[ 'required'=> 'Porsi Harus diisi']
+					   ],
+		'lama_memasak' => ['rules'=>'required|integer',
+						   'errors'=>[ 'required'=> 'Lama Memasak Harus diisi',
+									   'integer'=> 'Lama Memasak dalam bilangan angka dalam satuan menit'
+									   ]
+							 ],
+		'bahan' => ['rules'=>'required',
+					'errors'=>[ 'required'=> 'Bahan Harus diisi']
+					   ],
+		'tutorial' => ['rules'=>'required',
+						'errors'=>[ 'required'=> 'Cara Memasak Harus diisi']
+						 ],
+	])) {
+		$validation = \Config\Services::validation();
+		return redirect()->to(base_url('/recipe/edit/'.$id_resep))->withInput()->with('validation',$validation);
+	}
+		
+		//dd($this->request->getVar());
+		$this->resepModel->save([
+			'id_resep' => $id_resep,
+			'id_user' => $this->request->getVar('id_user'),
+			'judul' => $this->request->getVar('judul'),
+			'porsi' => $this->request->getVar('porsi'),
+			'lama_memasak' => $this->request->getVar('lama_memasak'),
+			'bahan' => $this->request->getVar('bahan'),
+			'tutorial' => $this->request->getVar('tutorial'),
+			'gambar_banner' => $this->request->getVar('gambar_banner'),
+			'gambar_tutorial' => $this->request->getVar('gambar_tutorial')
+		]);
+		session()->setFlashdata('pesan', 'Resep Berhasil Diubah.');
+		return redirect()->to(base_url('/recipe/'.$id_resep));
+		
+	}
 
 	//--------------------------------------------------------------------
 

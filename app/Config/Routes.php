@@ -35,8 +35,9 @@ $routes->get('/','Index::index');
 $routes->get('/recipe/create','Recipe::create');
 $routes->get('/article/(:segment)','Article::detail/$1');
 $routes->get('/recipe/(:segment)','Recipe::detail/$1');
-$routes->delete('/recipe/delete/(:segment)','Recipe::delete/$1');
+$routes->delete('/recipe/(:segment)','Recipe::delete/$1');
 $routes->get('/recipe/edit/(:segment)','Recipe::edit/$1');
+
 
 
 /**

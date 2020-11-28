@@ -6,7 +6,7 @@
   </div>
   <div class="row text-left align-self-left">
     <div class="w-100">
-    <form action="/recipe/save" method="post">
+    <form action="/recipe/save" method="post" enctype="multipart/form-data">
     <?= csrf_field(); ?>
 <!-- user sementara-->    
 <input type="hidden" class="form-control" id="id_user" name="id_user" value="1">
@@ -14,7 +14,7 @@
             <label for="judul" class="col-sm-2" >Judul</label>
             
             <div class="col-sm-10">
-                <input type="text" class="form-control <?= ($validation->hasError('judul')) ? 'is-invalid' : '' ;?>" id="judul" name="judul" placeholder="masukan judul masakan anda disini" autofocus >
+                <input type="text" class="form-control <?= ($validation->hasError('judul')) ? 'is-invalid' : '' ;?>" id="judul" name="judul" placeholder="masukan judul masakan anda disini" autofocus value="<?= old('judul')?>">
                 <div class="invalid-feedback">
                     <?=$validation->getError('judul');?>
                 </div>
@@ -23,7 +23,7 @@
         <div class="form-group row">
         <label for="porsi" class="col-sm-2" >Jumlah Porsi</label>
             <div class="col-sm-10">
-                <input type="number" class="form-control <?= ($validation->hasError('porsi')) ? 'is-invalid' : '' ;?>" id="porsi" name="porsi" placeholder="Masukkan jumlah porsi">
+                <input type="number" class="form-control <?= ($validation->hasError('porsi')) ? 'is-invalid' : '' ;?>" id="porsi" name="porsi" placeholder="Masukkan jumlah porsi" value="<?= old('porsi')?>">
                 <div class="invalid-feedback">
                     <?=$validation->getError('porsi');?>
                 </div>
@@ -32,7 +32,7 @@
         <div class="form-group row">
         <label for="lama_memasak" class="col-sm-2" >Lama Memasak</label>
             <div class="col-sm-8">
-                <input type="Text" class="form-control <?= ($validation->hasError('lama_memasak')) ? 'is-invalid' : '' ;?>" id="lama_memasak" name="lama_memasak" placeholder="Masukkan waktu memasak" >
+                <input type="Text" class="form-control <?= ($validation->hasError('lama_memasak')) ? 'is-invalid' : '' ;?>" id="lama_memasak" name="lama_memasak" placeholder="Masukkan waktu memasak" value="<?= old('lama_memasak')?>" >
                 <div class="invalid-feedback">
                     <?=$validation->getError('lama_memasak');?>
                 </div>
@@ -43,7 +43,7 @@
         <div class="form-group row">
         <label for="bahan" class="col-sm-2">Bahan</label>
             <div class="col-sm-10">
-            <textarea class="form-control <?= ($validation->hasError('bahan')) ? 'is-invalid' : '' ;?>" id="bahan" name="bahan" rows="3" placeholder="Masukkan Bahan" ></textarea>
+            <textarea class="form-control <?= ($validation->hasError('bahan')) ? 'is-invalid' : '' ;?>" id="bahan" name="bahan" rows="3" placeholder="Masukkan Bahan" ><?= old('bahan')?></textarea>
             <div class="invalid-feedback">
                     <?=$validation->getError('bahan');?>
                 </div>
@@ -53,29 +53,39 @@
         <div class="form-group row">
         <label for="tutorial" class="col-sm-2">Cara Memasak</label>
             <div class="col-sm-10">
-            <textarea class="form-control <?= ($validation->hasError('tutorial')) ? 'is-invalid' : '' ;?>" id="tutorial" name="tutorial" rows="3" placeholder="Masukkan Cara memasak"></textarea>
+            <textarea class="form-control <?= ($validation->hasError('tutorial')) ? 'is-invalid' : '' ;?>" id="tutorial" name="tutorial" rows="3" placeholder="Masukkan Cara memasak"><?= old('tutorial')?></textarea>
                 <div class="invalid-feedback">
                         <?=$validation->getError('tutorial');?>
                 </div>
             </div>
 
         </div>
+        
         <div class="form-group row">
             <label for="gambar_banner" class="col-sm-2">Masukkan Gambar banner <br><p color=red>*wajib diisi</p></label>
             <div class="col-sm-10">
-                <input type="file" class="form-control <?= ($validation->hasError('gambar_banner')) ? 'is-invalid' : '' ;?>" id="gambar_banner" name="gambar_banner">
-                <div class="invalid-feedback">
-                    <?=$validation->getError('gambar_banner');?>
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="gambar_banner" name="gambar_banner">
+                    <div class="invalid-feedback">
+                        <?=$validation->getError('gambar_banner');?>
+                    </div>
+                    <label class="custom-file-label" for="gambar_banner">Pilih Gambar Banner...</label>
                 </div>
             </div>
-
         </div>
         <div class="form-group row">
             <label for="gambar_tutorial" class="col-sm-2">Masukkan Gambar Tutorial <br><p color=red>(jika ada)</p></label>
             <div class="col-sm-10">
-                <input type="file" class="form-control" id="gambar_tutorial" name="gambar_tutorial">
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="gambar_tutorial" name="gambar_tutorial">
+                    <div class="invalid-feedback">
+                        <?=$validation->getError('ggambar_tutorial');?>
+                    </div>
+                    <label class="custom-file-label" for="gambar_tutorial">Pilih Gambar Tutorial...</label>
+                </div>
             </div>
         </div>
+ 
         <div class="text-center">
         <button type="submit" class="btn btn-success" >Simpan Resep</button>
         <button type="button" class="btn btn-primary" >Batal Simpan</button>
