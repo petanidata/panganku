@@ -93,17 +93,21 @@ class Recipe extends BaseController
 		}
 		// ambil gambar
 		$fileBanner = $this->request->getFile('gambar_banner');
-		$fileTutorial = $this->request->getFile('gambar_tutorial');
-		dd($fileTutorial);
-
-		//pake nama random
 		$namaBanner = $fileBanner->getRandomName();
-		$namaTutorial = $fileTutorial->getRandomName();
-		//pindahin
 		$fileBanner->move('img/recipe/', $namaBanner);
-		$fileTutorial->move('img/recipe/', $namaTutorial);
 		
-		// dd($fileBanner);
+		$Tutorial = $this->request->getFileMultiple('gambar_tutorial');
+		
+		// dd($fileTutorial[0]);
+		$fileTutorial = "";
+		foreach ($Tutorial as $t) {
+			$namaTutorial = $t->getRandomName();
+			$t->move('img/recipe/', $namaTutorial);
+			$fileTutorial.=$namaTutorial.',';
+		}
+		 
+		$namaTutorial = substr($fileTutorial,0,-1);
+
 		$this->resepModel->save([
 			'id_user' 		=> $this->request->getVar('id_user'),
 			'judul' 		=> $this->request->getVar('judul'),
@@ -164,23 +168,25 @@ class Recipe extends BaseController
 		// return redirect()->to(base_url('/recipe/edit/'.$id_resep))->withInput()->with('validation',$validation);
 		return redirect()->to(base_url('/recipe/edit/'.$id_resep))->withInput();
 	}
-
-	if (!empty($this->request->getFile('gambar_banner'))) {
-		$fileBanner = $this->request->getFile('gambar_banner');
-		$namaBanner = $fileBanner->getRandomName();
-		$fileBanner->move('img/recipe/',$namaBanner);
+	$fileBanner = $this->request->getFile('gambar_banner');
+	if ($fileBanner->getError() == 4) {
+		$namaBanner = $this->request->getVar('gambar_banner_old');
+		
 	} else {
-		$namaBanner = $this->request->getVar('$gambar_banner_old');
+		$namaBanner = $fileBanner->getRandomName();
+		$fileBanner->move('img/recipe/', $namaBanner);
 	}
 		//getFile
+
 		$fileTutorial = $this->request->getFile('gambar_tutorial');
 		// dd($fileBanner);
 
 		//pake nama random
 		$namaTutorial = $fileTutorial->getRandomName();
+	if (! $fileBanner->getError() == 4) { //ada filenya
 		//pindahin
 		$fileTutorial->move('img/recipe/', $namaTutorial);
-		
+	}	
 		//dd($this->request->getVar());
 		$this->resepModel->save([
 			'id_resep' => $id_resep,

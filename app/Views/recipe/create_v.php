@@ -65,7 +65,7 @@
             <label for="gambar_banner" class="col-sm-2">Masukkan Gambar Banner <br><p color=red>*wajib diisi</p></label>
             <div class="col-sm-10">
                 <div class="form-control">
-                    <input type="file" class="form-control-file <?= ($validation->hasError('gambar_banner')) ? 'is-invalid' : '' ;?>" id="gambar_banner" name="gambar_banner[]">
+                    <input type="file" class="form-control-file <?= ($validation->hasError('gambar_banner')) ? 'is-invalid' : '' ;?>" id="gambar_banner" name="gambar_banner">
                     <div class="invalid-feedback">
                         <?=$validation->getError('gambar_banner');?>
                     </div>
@@ -76,7 +76,7 @@
             <label for="gambar_tutorial" class="col-sm-2">Masukkan Gambar Tutorial <br><p color=red>(jika ada)</p></label>
             <div class="col-sm-10">
                 <div class="form-control">
-                    <input type="file" class="form-control-file <?= ($validation->hasError('gambar_tutorial')) ? 'is-invalid' : '' ;?>" id="gambar_tutorial" name="gambar_tutorial" multiple>
+                    <input type="file" class="form-control-file <?= ($validation->hasError('gambar_tutorial')) ? 'is-invalid' : '' ;?>" id="gambar_tutorial" name="gambar_tutorial[]" multiple>
                     <div class="invalid-feedback">
                         <?=$validation->getError('gambar_tutorial');?>
                     </div>
