@@ -45,15 +45,47 @@ class Recipe extends BaseController
 	}
 	public function create()
 	{
+		
 		$title =  ['title' => 'Buat Resep | Panganku'];
+		$data = [
+			'validation' =>  \Config\Services::validation()
+		];
 		
 		echo view('header_v',$title);
-		echo view('recipe/create_v');
+		echo view('recipe/create_v', $data);
 		echo view('footer_v');
 	}
 	public function save()
 	{
 		//dd($this->request->getVar());
+		if(!$this->validate([
+			'judul' => ['rules'=>'required',
+						'errors'=>[ 'required'=> ' Harus diisi']
+					   ],
+			'porsi' => ['rules'=>'required',
+						'errors'=>[ 'required'=> 'Porsi Harus diisi']
+		   				],
+			'lama_memasak' => ['rules'=>'required|integer',
+							   'errors'=>[ 'required'=> 'Lama Memasak Harus diisi',
+										   'integer'=> 'Lama Memasak dalam bilangan angka dalam satuan menit'
+					  					 ]
+			   				  ],
+			'bahan' => ['rules'=>'required',
+						'errors'=>[ 'required'=> 'Bahan Harus diisi']
+			   			],
+			'tutorial' => ['rules'=>'required',
+							'errors'=>[ 'required'=> 'Cara Memasak Harus diisi']
+			   			  ],
+			'gambar_banner' => ['rules'=>'required',
+								'errors'=>[ 'required'=> 'Gambar Banner Harus diisi']
+								],
+		])) {
+			$validation = \Config\Services::validation();
+			return redirect()->to(base_url('/recipe/create'))->withInput()->
+			with('validation',$validation);
+		}
+
+
 		$this->resepModel->save([
 			'id_user' => $this->request->getVar('id_user'),
 			'judul' => $this->request->getVar('judul'),
@@ -67,7 +99,25 @@ class Recipe extends BaseController
 		session()->setFlashdata('pesan', 'Resep Berhasil Disimpan.');
 		return redirect()->to(base_url('/recipe'));
 	}
-
+	public function delete($id_resep)
+	{
+		$this->resepModel->delete($id_resep);
+		session()->setFlashdata('pesan', 'Resep Berhasil Dihapus.');
+		return redirect()->to(base_url('/recipe'));
+	}
+	public function edit($id_resep)
+	{
+				
+		$title =  ['title' => 'Buat Resep | Panganku'];
+		$data = [
+			'validation' =>  \Config\Services::validation(),
+			'resep' => $this->resepModel->getResep($id_resep),
+		];
+		
+		echo view('header_v',$title);
+		echo view('recipe/edit_v', $data);
+		echo view('footer_v');
+	}
 
 	//--------------------------------------------------------------------
 

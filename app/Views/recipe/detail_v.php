@@ -8,6 +8,17 @@
   <section id="features" class="padd-section text-center wow fadeInUp">
 
     <div class="container">
+    <div class="d-flex">
+        <a href="/recipe" class="btn btn-success"> Kembali ke resep</a>
+        <a href="/recipe/edit/<?=$resep['id_resep'];?>" class="btn btn-warning ml-auto mr-2"> Edit Resep</a>
+        <form action="/recipe/delete/<?=$resep['id_resep'];?>" method="post">
+          <?= csrf_field()?>
+          <input type="hidden" name="_method" value="DELETE">
+          <button type="submit" class="btn btn-danger" > Hapus Resep </button>
+        </form>
+        
+        
+      </div>
       <div class="section-title text-center">
         <h2><b><?= $resep['judul'];?></b></h2>
         <p class="separator"> oleh </p><b><?= $resep['username'];?></b>
