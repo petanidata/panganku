@@ -54,7 +54,7 @@ class Recipe extends BaseController
 	public function save()
 	{
 		//dd($this->request->getVar());
-		$this->ResepModel->save([
+		$this->resepModel->save([
 			'judul' => $this->request->getVar('judul'),
 			'porsi' => $this->request->getVar('porsi'),
 			'lama_memasak' => $this->request->getVar('lama_memasak'),
