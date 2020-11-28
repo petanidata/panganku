@@ -1,6 +1,7 @@
 <?php namespace App\Controllers;
 use App\Models\ResepModel;
 use App\Models\KomentarModel;
+use CodeIgniter\Exceptions\PageNotFoundException;
 class Recipe extends BaseController
 {
 	protected $artikelModel;
@@ -34,6 +35,9 @@ class Recipe extends BaseController
 		];
 		//dd($data);
 		//dd($komentar);
+		if (empty($data['resep'])){
+			throw new PageNotFoundException('Resep tidak ditemukan');
+		}
 		echo view('header_v',$title);
 		echo view('recipe/detail_v',$data);
 		echo view('recipe/komentar_v',$komentar);
@@ -46,6 +50,19 @@ class Recipe extends BaseController
 		echo view('header_v',$title);
 		echo view('recipe/create_v');
 		echo view('footer_v');
+	}
+	public function save()
+	{
+		//dd($this->request->getVar());
+		$this->ResepModel->save([
+			'judul' => $this->request->getVar('judul'),
+			'porsi' => $this->request->getVar('porsi'),
+			'lama_memasak' => $this->request->getVar('lama_memasak'),
+			'bahan' => $this->request->getVar('bahan'),
+			'tutorial' => $this->request->getVar('tutorial'),
+			'gambar_banner' => $this->request->getVar('gambar_banner'),
+			'gambar_tutorial' => $this->request->getVar('gambar_tutorial'),
+		]);
 	}
 
 

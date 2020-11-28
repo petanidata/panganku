@@ -6,11 +6,12 @@
   </div>
   <div class="row text-left align-self-left">
     <div class="w-100">
-    <form>
+    <form action="/recipe/save" method="post">
+    <?= csrf_field(); ?>
         <div class="form-group row">
             <label for="judul" class="col-sm-2" >Nama Makanan</label>
             <div class="col-sm-10">
-                <input type="type" class="form-control" id="judul" name="judul" placeholder="masukan judul masakan anda disini">
+                <input type="type" class="form-control" id="judul" name="judul" placeholder="masukan judul masakan anda disini" autofocus>
             </div>
         </div>
         <div class="form-group row">
@@ -20,9 +21,9 @@
             </div>
         </div>
         <div class="form-group row">
-        <label for="porsi" class="col-sm-2" >Lama Memasak</label>
+        <label for="lama_memasak" class="col-sm-2" >Lama Memasak</label>
             <div class="col-sm-8">
-                <input type="Text" class="form-control" id="porsi" name="porsi">
+                <input type="Text" class="form-control" id="lama_memasak" name="lama_memasak">
             </div>
             <div class="col-sm-2 text-left">menit</div>
         </div>
@@ -49,6 +50,10 @@
             <div class="col-sm-10">
                 <input type="file" class="form-control" id="gambar_tutorial" name="gambar_tutorial">
             </div>
+        </div>
+        <div class="text-center">
+        <button type="submit" class="btn btn-success" >Simpan Resep</button>
+        <button type="button" class="btn btn-primary" >Batal Simpan</button>
         </div>
         </form>
     </div>
