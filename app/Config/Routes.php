@@ -32,13 +32,16 @@ $routes->setAutoRoute(true);
 // route since we don't have to scan directories.
 // $routes->get('/', 'Home::index');
 $routes->get('/','Index::index');
+
 $routes->get('/recipe/create','Recipe::create');
-$routes->get('/article/create','Article::create');
-$routes->get('/article/(:segment)','Article::detail/$1');
 $routes->get('/recipe/(:segment)','Recipe::detail/$1');
-$routes->delete('/recipe/(:segment)','Recipe::delete/$1');
 $routes->get('/recipe/edit/(:segment)','Recipe::edit/$1');
 $routes->get('/recipe/komentarEdit/(:segment)','Recipe::komentarEdit/$1');
+$routes->delete('/recipe/(:segment)','Recipe::delete/$1');
+
+$routes->get('/article/create','Article::create');
+$routes->get('/article/(:segment)','Article::detail/$1');
+
 $routes->get('/login','User::login');
 $routes->get('/logout','User::logout');
 $routes->get('/register','User::register');

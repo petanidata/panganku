@@ -61,7 +61,7 @@
         </div>
 
         <div class="form-group row">
-            <label for="gambar_banner" class="col-sm-2">Masukkan Gambar banner <br><p color=red>*wajib diisi</p></label>
+            <label for="gambar_banner" class="col-sm-2">Masukkan Gambar banner <br><p color=red>(jika ingin diubah)</p></label>
             <div class="col-sm-10">
                 <div class="form-control">
                     <input type="hidden" name="gambar_banner_old" value="<?= $resep['gambar_banner']?>">
