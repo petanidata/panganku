@@ -244,17 +244,17 @@ class Recipe extends BaseController
 		}
 		// ambil gambar
 		$fileGambar = $this->request->getFile('gambar');
+		//dd($fileGambar);
 		$namaGambar = "";
-		if (!$fileGambar == null) {
+		if (! $fileGambar->getName() == "") {
 		$namaGambar = $fileGambar->getRandomName();
-		$fileGambar->move('img/recipe/komen', $namaKomen);
+		$fileGambar->move('img/recipe/komen', $namaGambar);
 		}
-
+		
 		$this->komentarModel->save([
 			'id_user' 		=> $this->request->getVar('id_user'),
 			'id_resep' 		=> $this->request->getVar('id_resep'),
 			'komentar' 		=> $this->request->getVar('komentar'),
-			'waktu_komen'	=> date("d/m/Y h:i:s"),
 			'gambar' => $namaGambar,
 				
 		]);

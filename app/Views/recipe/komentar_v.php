@@ -6,7 +6,7 @@
     <div class="col-md-12 col-lg-12 btn-isi-komen mt-1">
         <div class="d-flex">
           <div class="ml-0 mr-auto">
-            <b><?=$k['username'];?></b> pada <?php echo date_format(date_create($k['waktu_komen']), 'H:i d-m-Y');?>
+            <b><?=$k['username'];?></b> pada <?php echo date_format(date_create($k['created_at']), 'H:i d-m-Y');?>
           </div>
           <?php if((session()->get('id_user')==$k['id_user']) or (session()->get('is_admin')=="Y" ) or (session()->get('id_user')==$resep['id_user']) )  { ?>
           <div class="mr-0" >
@@ -15,7 +15,10 @@
           </div>
           <?php }?>
         </div>    
-        <?=$k['komentar'];?>
+        <?=$k['komentar'];?><br/>
+        <?php if(!$k['gambar']=="") {?>
+        <img src="<?=base_url('img/recipe/komen/'.$k['gambar']); ?>" width="350px" >
+        <?php } ?>
     </div>
   <?php endforeach;?>
   <?php if(session()->get('logged_in')==TRUE)  { ?>
@@ -28,6 +31,13 @@
             </div>
             <input type="hidden" name="id_user" value="<?=session()->get('id_user');?>">
             <input type="hidden" name="id_resep" value="<?=$resep['id_resep']?>">
+            <div class="form-group">
+                            <label for="gambar">Masukkan Foto (jika ada)</label>
+                            <input type="file" class="form-control-file <?= ($validation->hasError('gambar')) ? 'is-invalid' : '' ;?>" id="gambar" name="gambar">
+                            <div class="invalid-feedback">
+                                <?=$validation->getError('gambar');?>
+                            </div>
+                        </div>
           <button type="submit" class="btn btn-success"> Kirim Komentar </button>
       </form>
           </div>

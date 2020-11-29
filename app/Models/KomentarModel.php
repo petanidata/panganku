@@ -7,7 +7,7 @@ class KomentarModel extends Model
     protected $table      = 'komentar';
     protected $primaryKey = 'id_komentar';
     protected $useTimestamps = false;
-    protected $allowedFields = ['id_user','id_resep','komentar','waktu_komen','komentar'];
+    protected $allowedFields = ['id_user','id_resep','komentar','komentar','gambar'];
     public function getKomentar($id_resep)
     {
         return $this->join('user','user.id_user=komentar.id_user')
