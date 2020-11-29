@@ -16,7 +16,7 @@
     <?php if(session()->get('logged_in')==TRUE) {?>
     <div class="container">
         <div class="section-title text-right">
-            <a href="<?= base_url('recipe/create');?>" class="btn btn-success"> Tambah Resep </a>
+            <a href="<?= base_url('article/create');?>" class="btn btn-success"> Tambah Resep </a>
         </div>
     </div>
     <?php }?>
