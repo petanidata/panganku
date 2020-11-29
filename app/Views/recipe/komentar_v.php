@@ -15,8 +15,9 @@
                 <input type="hidden" name="id_resep" value="<?=$k['id_resep']?>">
                 <button><i class="fa fa-trash-o"></i></button>      
               </form>
-              <a href="/recipe/komentarEdit/<?=$k['id_komentar'];?>" class="btn btn-warning ml-auto mr-2"> Edit Resep</a>
-              <button><i class="fa fa-pencil-square-o" ></i></button>  
+              
+              <a href="/recipe/komentarEdit/<?=$k['id_komentar'];?>" ><button><i class="fa fa-pencil-square-o" ></i></button>  </a>
+              
             </div>
           </div>
           <?php }?>

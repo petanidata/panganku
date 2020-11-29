@@ -8,14 +8,23 @@ class KomentarModel extends Model
     protected $primaryKey = 'id_komentar';
     protected $useTimestamps = true;
     protected $allowedFields = ['id_user','id_resep','komentar','gambar'];
+    public function getKomentarbyid($id_komentar = false)
+    {
+        if ($id_komentar == false){
+            return $this->findAll();
+       }
+       return $this->Where(['id_komentar' => $id_komentar])->first();
+    }
     public function getKomentar($id_resep)
     {
-        return $this->join('user','user.id_user=komentar.id_user')
-        ->getWhere(['id_resep' => $id_resep])->getResultArray();
+        return $this->join('user','user.id_user=komentar.id_user')->getWhere(['id_resep' => $id_resep])->getResultArray();
     }
+
     /*public function getKomentar($id_resep)
     {
         return $this->join('user','user.id_user=komentar.id_user')
         ->getWhere(['id_resep' => $id_resep])->getResultArray();
     }*/
+
+    
 }

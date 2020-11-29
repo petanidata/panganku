@@ -270,15 +270,55 @@ class Recipe extends BaseController
 		return redirect()->to(base_url('/recipe/detail/'.$id_resep));
 	}
 	public function komentarEdit($id_komentar)
-	{$title =  ['title' => 'Edit Komentar | Panganku'];
+	{
+		$id_resep = $this->request->getVar('id_resep');
+		$title =  ['title' => 'Edit Komentar | Panganku'];
 		$data = [
 			'validation' =>  \Config\Services::validation(),
-			'komentar' => $this->resepModel->getKomentar($id_resep),
+			'komentarresep' => $this->komentarModel->getKomentar($id_resep),
+			'komentar' => $this->komentarModel->getKomentarbyid($id_komentar),
+			 
+			
 		];
 		
+		
 		echo view('header_v',$title);
-		echo view('recipe/edit_komentar_v', $data);
+		echo view('/recipe/edit_komentar_v', $data);
 		echo view('footer_v');
+	}
+
+	public function komentarUpdate($id_komentar){
+		if(!$this->validate([
+			'komentar' => ['rules'=>'required',
+						'errors'=>[ 'required'=> 'Komentar Harus diisi']
+					   ],
+			'gambar' =>['rules'=>'is_image[gambar]|mime_in[gambar,image/jpg,image/jpeg,image/png]',
+							   'errors'=>[ 'is_image'	=> 'File harus berupa gambar',
+											'mime_in'	=> 'File berformat jpg/jpeg/png']
+							 ],
+
+
+		])) {
+			// $validation = \Config\Services::validation();
+			// return redirect()->to(base_url('/recipe/create'))->withInput()->with('validation',$validation);
+			return redirect()->to(base_url('/recipe/detail/'.$id_resep))->withInput();
+		}
+		$fileGambar = $this->request->getFile('gambar');
+		if ($fileGambar->getError() == 4) {
+			$namaGambar = $this->request->getVar('gambarOld');
+	
+		} else {
+			$namaGambar = $fileGambar->getRandomName();
+			$fileGambar->move('img/recipe/komen', $namaGambar);
+		}
+		
+		$this->komentarModel->save([
+			'id_komentar' => $id_komentar,
+			'komentar' 	  => $this->request->getVar('komentar'),
+			'gambar'     => $namaGambar,
+		]);
+		session()->setFlashdata('pesan', 'Komentar Berhasil Diubah.');
+		return redirect()->to(base_url('/recipe/detail/'.$this->request->getVar('id_resep')));
 	}
 
 
