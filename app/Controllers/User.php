@@ -1,19 +1,55 @@
 <?php namespace App\Controllers;
-
+use App\Models\UserModel;
 class User extends BaseController
 {
+	protected $userModel;
+	public function __construct()
+	{
+		$this->userModel = new UserModel();
+	}
 	public function login()
 	{
 		$title = [
 			'title' => 'Login | Panganku'
 		];
+		$data = [
+			'validation' =>  \Config\Services::validation()
+		];
 		echo view('header_v',$title);
-		echo view('user/login_v');
+		echo view('user/login_v',$data);
 		echo view('footer_v');
 	}
 	public function auth(){
-
+		$session = session();
+		$username = $this->request->getVar('username');
+		$password = $this->request->getVar('password');
+		$data = $this->userModel->where('username',$username)->first();
+		
+		if($data){
+			$pass = $data['password'];
+			$verify_pass = ($pass == $password);
+			// dd($verify_pass);
+			if ($verify_pass) {
+				$sess_data = [
+					'id_user' => $data['id_user'],
+					'is_admin' => $data['is_admin'],
+					'username' => $data['username'],
+					'logged_in'=> TRUE
+				];
+			$session->set($sess_data);
+			return redirect()->to(base_url());
+			}
+			else {
+				$session->setFlashdata('pesan', 'Password salah');
+				return redirect()->to(base_url('login'));
+			}
+		}
+		else {
+			$session->setFlashdata('pesan', 'Email Tidak terdaftar');
+			return redirect()->to(base_url('login'));
+		}
 	}
+
 	public function register()
 	{
 		$title = [
@@ -29,16 +65,29 @@ class User extends BaseController
 	public function addUser()
 	{
 		if(!$this->validate([
-			//'username','nama_lengkap','email','password','jenis_kelamin','alamat','gambar_profile','bio','is_admin'
-			'username' => ['rules'=>'required|is_unique[username]',
+			'username' => ['rules'=>'required|is_unique[user.username]',
 						'errors'=>[ 'required'=>  'Harus diisi',
-									'is_unique'=> 'username telah digunakan']
+									'is_unique'=> 'Username telah digunakan']
 					   ],
-			'email' => ['rules'=>'required|is_unique[username]',
-						'errors'=>[ 'required'=> 'Porsi Harus diisi',
+			'password' => ['rules'=>'required|min_length[8]',
+							 'errors'=>[ 'required'=>  'Password wajib diisi',
+							 			'min_length'=> 'Password minimal 8 karakter']
+
+							  ],
+			'email' => ['rules'=>'required|is_unique[user.email]',
+						'errors'=>[ 'required'=> 'Email Harus diisi',
 									'is_unique'=>'Email Pernah digunakan']
 						   ],
 			'jenis_kelamin' => ['rules'=> 'required|in_list[L,P]'],
+			'nama_lengkap' => ['rules'=>'required',
+							'errors'=>[ 'required'=>  'Isi Dengan nama lengkap anda']
+							 ],
+			'alamat' => ['rules'=>'required',
+							 'errors'=>[ 'required'=>  'Isi Dengan alamat anda']
+							  ],
+			'bio' => ['rules'=>'required',
+							  'errors'=>[ 'required'=>  'Isi Dengan bio anda']
+							   ],
 			'gambar_profile' =>['rules'=>'uploaded[gambar_profile]|is_image[gambar_profile]|mime_in[gambar_profile,image/jpg,image/jpeg,image/png]',
 							   'errors'=>[ 'uploaded'	=> 'Gambar Profile harus diisi',
 											'is_image'	=> 'File harus berupa gambar',
@@ -51,7 +100,32 @@ class User extends BaseController
 			// return redirect()->to(base_url('/recipe/create'))->withInput()->with('validation',$validation);
 			return redirect()->to(base_url('/register/'))->withInput();
 		}
+		$fileProfile = $this->request->getFile('gambar_profile');
+		$namaProfile = $fileProfile->getRandomName();
+		$fileProfile->move('img/user/', $namaProfile);
+
+		$this->userModel->save([
+			'username' 		=> $this->request->getVar('username'),
+			'nama_lengkap' 	=> $this->request->getVar('nama_lengkap'),
+			'email'     	=> $this->request->getVar('email'),
+			'password' 		=> password_hash($this->request->getVar('password')),
+			'jenis_kelamin' => $this->request->getVar('jenis_kelamin'),
+			'alamat' 		=> $this->request->getVar('alamat'),
+			'jenis_kelamin' => $this->request->getVar('jenis_kelamin'),
+			'bio' 			=> $this->request->getVar('bio'),
+			'is_admin'		=> $this->request->getVar('email'),
+			'gambar_profile' => $namaProfile				
+		]);
+		session()->setFlashdata('pesan', 'User Berhasil Ditambahkan.');
+		return redirect()->to(base_url('/login'));
 	}
+	public function logout()
+    {
+		session()->destroy();
+		session()->setFlashdata('pesan', 'Anda telah logout.');
+		return redirect()->to(base_url('/login'));
+        
+    }
 
 
 	//--------------------------------------------------------------------

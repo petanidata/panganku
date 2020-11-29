@@ -9,7 +9,7 @@
     <form action="/recipe/save" method="post" enctype="multipart/form-data">
     <?= csrf_field(); ?>
 <!-- user sementara-->    
-<input type="hidden" class="form-control" id="id_user" name="id_user" value="1">
+<input type="hidden" class="form-control" id="id_user" name="id_user" value="<?=session()->get('id_user')?>">
         <div class="form-group row">
             <label for="judul" class="col-sm-2" >Judul</label>
             
@@ -58,7 +58,6 @@
                         <?=$validation->getError('tutorial');?>
                 </div>
             </div>
-
         </div>
 
         <div class="form-group row">

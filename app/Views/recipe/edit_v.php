@@ -9,7 +9,7 @@
     <form action="/recipe/update/<?= $resep['id_resep'];?>" method="post" enctype="multipart/form-data">
     <?= csrf_field(); ?>
 <!-- user sementara-->    
-<input type="hidden" class="form-control" id="id_user" name="id_user" value="1">
+<input type="hidden" class="form-control" id="id_user" name="id_user" value="<?= $resep['id_user'];?>">
         <div class="form-group row">
             <label for="judul" class="col-sm-2" >Nama Makanan</label>
             
@@ -65,7 +65,7 @@
             <label for="gambar_banner" class="col-sm-2">Masukkan Gambar banner <br><p color=red>*wajib diisi</p></label>
             <div class="col-sm-10">
                 <div class="form-control">
-                <input type="hidden" name="gambar_banner_old" value="<?= $resep['gambar_banner']?>">
+                    <input type="hidden" name="gambar_banner_old" value="<?= $resep['gambar_banner']?>">
                     <input type="file" class="form-control-file <?= ($validation->hasError('gambar_banner')) ? 'is-invalid' : '' ;?>" id="gambar_banner" name="gambar_banner">
                     <div class="invalid-feedback">
                         <?=$validation->getError('gambar_banner');?>
@@ -78,13 +78,13 @@
             <div class="col-sm-10">
                 <div class="form-control">
                     <input type="hidden" name="gambar_tutorial_old" value="<?= $resep['gambar_tutorial']?>">
-                    <input type="file" class="form-control-file <?= ($validation->hasError('gambar_tutorial')) ? 'is-invalid' : '' ;?>" id="gambar_tutorial" name="gambar_tutorial">
+                    <input type="file" class="form-control-file <?= ($validation->hasError('gambar_tutorial')) ? 'is-invalid' : '' ;?>" id="gambar_tutorial" name="gambar_tutorial[]" multiple >
                     <div class="invalid-feedback">
                         <?=$validation->getError('gambar_tutorial');?>
                     </div>
                 </div>
             </div>
-        </div
+        </div>
         <div class="text-center">
         <button type="submit" class="btn btn-success" >Ubah Resep</button>
         <a href="<?=base_url('/recipe/'.$resep['id_resep']);?>"  class="btn btn-primary" >Batal Simpan</a>

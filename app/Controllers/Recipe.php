@@ -7,6 +7,7 @@ class Recipe extends BaseController
 	protected $artikelModel;
 	public function __construct()
 	{
+		
 		$this->resepModel = new ResepModel();
 		$this->komentarModel = new KomentarModel();
 	}
@@ -97,11 +98,13 @@ class Recipe extends BaseController
 		$namaBanner = $fileBanner->getRandomName();
 		$fileBanner->move('img/recipe/', $namaBanner);
 		
-		$Tutorial = $this->request->getFileMultiple('gambar_tutorial');
+		
 		
 		// dd($fileTutorial[0]);
+		//dd($this->request->getFileMultiple('gambar_tutorial'));
+		$tutorial = $this->request->getFileMultiple('gambar_tutorial');
 		$fileTutorial = "";
-		foreach ($Tutorial as $t) {
+		foreach ($tutorial as $t) {
 			$namaTutorial = $t->getRandomName();
 			$t->move('img/recipe/', $namaTutorial);
 			$fileTutorial.=$namaTutorial.',';
@@ -163,32 +166,44 @@ class Recipe extends BaseController
 		'tutorial' => ['rules'=>'required',
 						'errors'=>[ 'required'=> 'Cara Memasak Harus diisi']
 						 ],
+						   	
 
-	])) {
+		])) {
 		// $validation = \Config\Services::validation();
 		// return redirect()->to(base_url('/recipe/edit/'.$id_resep))->withInput()->with('validation',$validation);
 		return redirect()->to(base_url('/recipe/edit/'.$id_resep))->withInput();
-	}
+		}
+
 	$fileBanner = $this->request->getFile('gambar_banner');
 	if ($fileBanner->getError() == 4) {
 		$namaBanner = $this->request->getVar('gambar_banner_old');
-		
+
 	} else {
 		$namaBanner = $fileBanner->getRandomName();
-		$fileBanner->move('img/recipe/', $namaBanner);
+		$fileBanner->move(base_url().'img/recipe/', $namaBanner);
 	}
-		//getFile
+///////////////////////////////////////////////////////////////////////
 
-		$fileTutorial = $this->request->getFile('gambar_tutorial');
-		// dd($fileBanner);
+	$tutorial = $this->request->getFileMultiple('gambar_tutorial');
+	d($tutorial);
+	if ($tutorial[0]->getName() == "" ) {
+		$namaTutorial = $this->request->getVar('gambar_tutorial_old');
+	} else {
+		$fileTutorial = "";
+		foreach ($tutorial as $tutorial) {
+			$namaTutorial = $tutorial->getRandomName();
+			$tutorial->move('img/recipe/', $namaTutorial);
+			$fileTutorial.=$namaTutorial.',';
+		}
+		 
+		$namaTutorial = substr($fileTutorial,0,-1);
+	}
+	
+		
+		
+		// d( $this->request->getMultipleFile('gambar_tutorial'));
+		// dd($namaTutorial);
 
-		//pake nama random
-		$namaTutorial = $fileTutorial->getRandomName();
-	if (! $fileBanner->getError() == 4) { //ada filenya
-		//pindahin
-		$fileTutorial->move('img/recipe/', $namaTutorial);
-	}	
-		//dd($this->request->getVar());
 		$this->resepModel->save([
 			'id_resep' => $id_resep,
 			'id_user' => $this->request->getVar('id_user'),
@@ -202,6 +217,7 @@ class Recipe extends BaseController
 		]);
 		session()->setFlashdata('pesan', 'Resep Berhasil Diubah.');
 		return redirect()->to(base_url('/recipe/'.$id_resep));
+		
 		
 	}
 

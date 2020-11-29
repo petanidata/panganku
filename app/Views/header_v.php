@@ -47,7 +47,11 @@
           <li><a href=<?php echo base_url('recipe'); ?>>Recipe</a></li>
           <li><a href=<?php echo base_url('article'); ?>>Article</a></li>
           <li><a href=<?php echo base_url('team'); ?>>Team</a></li>
+          <?php if(session()->get('logged_in')==FALSE) {?>
           <a href="<?php echo base_url('login'); ?>" class="btn-login">Login</a>
+          <?php } else { ?>
+            <a href="<?php echo base_url('logout'); ?>" class="btn-danger">Logout</a>
+          <?php }?>
         </ul>
       </nav><!-- #nav-menu-container -->
     </div>

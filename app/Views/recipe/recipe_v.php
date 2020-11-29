@@ -24,11 +24,13 @@
             <?php endif;?>
         </div>
     </div>
+    <?php if(session()->get('logged_in')==TRUE) {?>
     <div class="container">
         <div class="section-title text-right">
             <a href="<?= base_url('recipe/create');?>" class="btn btn-success"> Tambah Resep </a>
         </div>
     </div>
+    <?php }?>
 <!--mulai recipe-->
     <div class="container">
       <div class="row">

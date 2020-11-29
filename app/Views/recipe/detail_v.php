@@ -18,12 +18,15 @@
     <div class="container">
     <div class="d-flex">
         <a href="/recipe" class="btn btn-success"> Kembali ke resep</a>
+        <?php if((session()->get('id_user')==$resep['id_user']) or (session()->get('is_admin')=="Y" )) { ?>
         <a href="/recipe/edit/<?=$resep['id_resep'];?>" class="btn btn-warning ml-auto mr-2"> Edit Resep</a>
         <form action="/recipe/delete/<?=$resep['id_resep'];?>" method="post">
           <?= csrf_field()?>
           <input type="hidden" name="_method" value="DELETE">
           <button type="submit" class="btn btn-danger" > Hapus Resep </button>
         </form>
+        <?php }?>
+
         
         
       </div>

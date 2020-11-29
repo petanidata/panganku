@@ -12,22 +12,38 @@
           <div class="card" style="width: 24rem;">
             <div class="card-body">
               <h3 class="card-title text-center" style="padding-top: auto;">Login Pengguna</h3>
+              <div class="container">
+        <div class="section-title text-center">
+            
+            <?php if(session()->getFlashData('pesan')) :?>
+              <div class="alert alert-primary" role="alert">
+                <?= session()->getFlashData('pesan') ?>
+              </div>
+            <?php endif;?>
+        </div>
+    </div>
               <br>
               
-              <form method="POST" action="/user/auth" id="form"></form>
+              <form method="post" action="/user/auth" >
               <?= csrf_field(); ?>
                 <div class="form-group">
                   <label for="username">Username</label>
-                  <input type="text" class="form-control" id="username" name="username">
+                  <input type="text" class="form-control <?= ($validation->hasError('username')) ? 'is-invalid' : '' ;?>" id="username" name="username" value="<?=old('username')?>">
+                  <div class="invalid-feedback">
+                            <?=$validation->getError('username');?>
+                          </div>
                 </div>
-                
                 <div class="form-group">
                   <label for="password">Password</label>
-                  <input type="password" class="form-control" id="password" name="email">
+                  <input name="password" type="password" class="form-control <?= ($validation->hasError('password')) ? 'is-invalid' : '' ;?>" id="password" placeholder="minimal 8 karakter"  value="<?= old('password')?>">
+                    <div class="invalid-feedback">
+                        <?=$validation->getError('password');?>
+                      </div>
                 </div>
                 <div class="row justify-content-between">
                   <div class="col-sm-auto w-100 ">
-                    <button type="submit" class="btn btn-primary w-100" id="submit">Login</button>
+                    <button type="submit" class="btn btn-success w-100">Login</button>
+            
                   </div>
                   <div class="col-sm-auto">
                     <a class="nav-link" href="/register">Belum punya akun ?</a>
