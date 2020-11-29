@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 29, 2020 at 10:50 AM
+-- Generation Time: Nov 29, 2020 at 11:33 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.9
 
@@ -35,6 +35,15 @@ CREATE TABLE `artikel` (
   `gambar` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `artikel`
+--
+
+INSERT INTO `artikel` (`id_artikel`, `id_user`, `judul`, `isi`, `gambar`) VALUES
+(3, 3, 'Judulnya', 'isinya', '1606678342_8736026aa862ecc7d13b.jpg'),
+(4, 3, 'tesis tambah edit', ' tambah\r\ntambah\r\ntambah\r\ntambah\r\ntambah\r\ntambah\r\ntambah\r\ntambah\r\n', '1606680563_b423d553c115bb5de275.jpg'),
+(5, 3, 'dadaadsada', 'adasdassdaadadsaa\r\nasdasda\r\nsaad', '1606680604_8c8d2e7c430d637fdd8a.jpg');
+
 -- --------------------------------------------------------
 
 --
@@ -45,18 +54,26 @@ CREATE TABLE `komentar` (
   `id_komentar` int(10) UNSIGNED NOT NULL,
   `id_user` int(10) UNSIGNED NOT NULL,
   `id_resep` int(10) UNSIGNED NOT NULL,
-  `waktu_komen` datetime NOT NULL,
+  `created_at` datetime DEFAULT NULL,
   `komentar` text DEFAULT NULL,
-  `gambar` text DEFAULT NULL
+  `gambar` text DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `komentar`
 --
 
-INSERT INTO `komentar` (`id_komentar`, `id_user`, `id_resep`, `waktu_komen`, `komentar`, `gambar`) VALUES
-(1, 2, 27, '2020-11-29 15:57:42', 'waw enaa', 'img/default.jpg'),
-(2, 3, 27, '2020-11-29 16:37:30', 'wdasdasdasdasqe', 'img/default.jpg');
+INSERT INTO `komentar` (`id_komentar`, `id_user`, `id_resep`, `created_at`, `komentar`, `gambar`, `updated_at`) VALUES
+(5, 3, 27, '0000-00-00 00:00:00', 'sas', NULL, NULL),
+(7, 3, 27, '0000-00-00 00:00:00', 'waww', NULL, NULL),
+(9, 3, 27, '0000-00-00 00:00:00', 'waw', '1606651381_4ce9012fa6a9d8bf11cb.png', NULL),
+(10, 3, 27, '0000-00-00 00:00:00', 'adasda', '', NULL),
+(11, 3, 27, '0000-00-00 00:00:00', 'dsaasda', '', NULL),
+(12, 3, 27, '0000-00-00 00:00:00', 'asdas', '', NULL),
+(13, 3, 27, '0000-00-00 00:00:00', 'adsas', '1606653071_371b15f299c857707cef.png', NULL),
+(14, 4, 27, '0000-00-00 00:00:00', 'sadasas', '', NULL),
+(15, 4, 27, '0000-00-00 00:00:00', 'ini komen lagi lah kuy', '1606669801_1880c8c4c76a7c217b83.jpg', '2020-11-29 11:10:18');
 
 -- --------------------------------------------------------
 
@@ -154,7 +171,10 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`id_user`, `username`, `nama_lengkap`, `email`, `password`, `jenis_kelamin`, `alamat`, `gambar_profile`, `bio`, `is_admin`, `created_at`, `updated_at`) VALUES
 (1, 'haris2703', 'Haris Prasetyo', 'haris_2703@apps.ipb.ac.id', '12345678', 'L', 'cbn bgr', 'img/default.jpg', 'img/default.jpg', 'N', NULL, NULL),
 (2, 'hp2703', 'Haris Prasetyo', 'haris2703@gmail.com', '12345678', 'L', 'cbn bgr', '1606604666_00937a1b59b2bd4e7355.jpg', 'life for life', 'N', '2020-11-28 17:04:26', '2020-11-28 17:04:26'),
-(3, 'harispr2703', '87654321', 'harispr2703@gmail.com', '87654321', 'L', 'sasd', '1606606120_730815d96bf5240cbc0e.jpg', 'adsasdas', 'h', '2020-11-28 17:28:40', '2020-11-28 17:28:40');
+(3, 'harispr2703', '87654321', 'harispr2703@gmail.com', '87654321', 'L', 'sasd', '1606606120_730815d96bf5240cbc0e.jpg', 'adsasdas', 'Y', '2020-11-28 17:28:40', '2020-11-28 17:28:40'),
+(4, 'harisharis', 'haris haris', 'harisharis@gmail.com', 'harisharis', 'L', 'rumah haris', '1606659382_05baed27899e24cac4ba.png', 'saya haris', 'h', '2020-11-29 08:16:22', '2020-11-29 08:16:22'),
+(5, 'userbiasa', 'user biasa', 'userbiasa@gmail.com', 'userbiasa', 'L', 'rumah biasa', 'N', 'hidup biasa', 'u', '2020-11-29 11:35:38', '2020-11-29 11:35:38'),
+(6, 'adminadmin', 'adminadmin', 'adminadmin@admin.com', 'adminadmin', 'P', 'rumah admin', '1606681554_65b0547d565724d851db.png', 'bio admin', 'Y', '2020-11-29 14:25:54', '2020-11-29 14:25:54');
 
 --
 -- Indexes for dumped tables
@@ -202,13 +222,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `artikel`
 --
 ALTER TABLE `artikel`
-  MODIFY `id_artikel` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id_artikel` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `komentar`
 --
 ALTER TABLE `komentar`
-  MODIFY `id_komentar` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_komentar` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -226,7 +246,7 @@ ALTER TABLE `resep`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_user` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Constraints for dumped tables
