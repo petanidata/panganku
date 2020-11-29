@@ -32,7 +32,7 @@
       </div>
       <div class="section-title text-center">
         <h2><b><?= $resep['judul'];?></b></h2>
-        <p class="separator"> oleh </p><b><?= $resep['username'];?></b>
+        <p class="separator"> oleh </p><b><?= $resep['nama_lengkap'];?></b>
       </div>
       <div class="row text-center align-self-center">
         <div class="col-md-12 col-lg-12">

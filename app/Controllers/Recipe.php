@@ -263,6 +263,13 @@ class Recipe extends BaseController
 		return redirect()->to(base_url('/recipe/detail/'.$id_resep));
 	
 	}
+	public function komentarDelete($id_komentar)
+	{
+		$id_resep = $this->request->getVar('id_resep');
+		$this->komentarModel->delete($id_komentar);
+		session()->setFlashdata('pesan', 'Komentar Berhasil Dihapus.');
+		return redirect()->to(base_url('/recipe/detail/'.$id_resep));
+	}
 
 	//--------------------------------------------------------------------
 

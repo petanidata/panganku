@@ -22,8 +22,9 @@ class Komentar extends Migration
 				'type'           	 => 'INT',
 				'unsigned'		 => true,
 			],
-			'waktu_komen'       => [
-					'type'           => 'DATETIME',					
+			'created_at' => [
+				'type'           => 'DATETIME',
+				'null'           => true
 			],
 			'komentar' => [
 					'type'           => 'TEXT',	
