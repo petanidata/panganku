@@ -1,13 +1,12 @@
 <section id="features" class="padd-section text-center wow fadeInUp">
 
 <div class="container">
-  <div class="section-title text-center">
-    <h2><b>Form Tambah Resep</b></h2>
-  </div>
+
   <div class="row text-left align-self-left">
     <div class="w-100">
     <form action="/recipe/update/<?= $resep['id_resep'];?>" method="post" enctype="multipart/form-data">
     <?= csrf_field(); ?>
+<!-- user sementara-->    
 <input type="hidden" class="form-control" id="id_user" name="id_user" value="<?= $resep['id_user'];?>">
         <div class="form-group row">
             <label for="judul" class="col-sm-2" >Nama Makanan</label>

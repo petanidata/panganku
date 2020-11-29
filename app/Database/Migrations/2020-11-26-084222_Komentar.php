@@ -22,10 +22,6 @@ class Komentar extends Migration
 				'type'           	 => 'INT',
 				'unsigned'		 => true,
 			],
-			'created_at' => [
-				'type'           => 'DATETIME',
-				'null'           => true
-			],
 			'komentar' => [
 					'type'           => 'TEXT',	
 					'null'           => true,
@@ -33,7 +29,15 @@ class Komentar extends Migration
 			'gambar' => [
 				'type'           	=> 'TEXT',	
 				'null'         		=> true,
-			]
+			],
+			'created_at' => [
+				'type'           => 'DATETIME',
+				'null'           => true
+			],
+			'updated_at' => [
+				'type'           => 'DATETIME',
+				'null'           => true
+			],
 	]);
 	$this->forge->addKey('id_komentar', true);
 	$this->forge->addForeignKey('id_user','User','id_user','CASCADE','CASCADE');

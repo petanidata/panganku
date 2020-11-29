@@ -114,7 +114,7 @@ class User extends BaseController
 			'jenis_kelamin' => $this->request->getVar('jenis_kelamin'),
 			'bio' 			=> $this->request->getVar('bio'),
 			'is_admin'		=> $this->request->getVar('email'),
-			'gambar_profile' => $namaProfile				
+			'gambar_profile' => "N"				
 		]);
 		session()->setFlashdata('pesan', 'User Berhasil Ditambahkan.');
 		return redirect()->to(base_url('/login'));

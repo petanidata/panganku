@@ -138,8 +138,7 @@ class Recipe extends BaseController
 		return redirect()->to(base_url('/recipe'));
 	}
 	public function edit($id_resep)
-	{
-				
+	{		
 		$title =  ['title' => 'Buat Resep | Panganku'];
 		$data = [
 			'validation' =>  \Config\Services::validation(),
@@ -270,6 +269,18 @@ class Recipe extends BaseController
 		session()->setFlashdata('pesan', 'Komentar Berhasil Dihapus.');
 		return redirect()->to(base_url('/recipe/detail/'.$id_resep));
 	}
+	public function komentarEdit($id_komentar)
+	{$title =  ['title' => 'Edit Komentar | Panganku'];
+		$data = [
+			'validation' =>  \Config\Services::validation(),
+			'komentar' => $this->resepModel->getKomentar($id_resep),
+		];
+		
+		echo view('header_v',$title);
+		echo view('recipe/edit_komentar_v', $data);
+		echo view('footer_v');
+	}
+
 
 	//--------------------------------------------------------------------
 

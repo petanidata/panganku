@@ -15,6 +15,7 @@
                 <input type="hidden" name="id_resep" value="<?=$k['id_resep']?>">
                 <button><i class="fa fa-trash-o"></i></button>      
               </form>
+              <a href="/recipe/komentarEdit/<?=$k['id_komentar'];?>" class="btn btn-warning ml-auto mr-2"> Edit Resep</a>
               <button><i class="fa fa-pencil-square-o" ></i></button>  
             </div>
           </div>
@@ -25,6 +26,7 @@
         <img src="<?=base_url('img/recipe/komen/'.$k['gambar']); ?>" width="350px" >
         <?php } ?>
     </div>
+
   <?php endforeach;?>
   <?php if(session()->get('logged_in')==TRUE)  { ?>
     <div class="col-md-12 col-lg-12 mt-1 btn-isi-komen p-2">
