@@ -108,7 +108,7 @@ class User extends BaseController
 			'username' 		=> $this->request->getVar('username'),
 			'nama_lengkap' 	=> $this->request->getVar('nama_lengkap'),
 			'email'     	=> $this->request->getVar('email'),
-			'password' 		=> password_hash($this->request->getVar('password')),
+			'password' 		=> $this->request->getVar('password'),
 			'jenis_kelamin' => $this->request->getVar('jenis_kelamin'),
 			'alamat' 		=> $this->request->getVar('alamat'),
 			'jenis_kelamin' => $this->request->getVar('jenis_kelamin'),

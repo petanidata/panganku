@@ -35,7 +35,7 @@
 
         <div class="col-md-6 col-md-4 col-lg-3">
           <div class="team-block bottom">
-            <img src="img/team/1.jpg" class="img-responsive" alt="img">
+            <img src="img/team/naufal.jpg" class="img-responsive" alt="img">
             <div class="team-content">
               <ul class="list-unstyled">
                 <li><a href="#"><i class="fa fa-facebook"></i></a></li>
@@ -43,7 +43,7 @@
                 <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
               </ul>
               <span>Analis</span>
-              <h4>Nauval Ali Navis <p>J3C218189</p></h4>
+              <h4>Naufal Aly Nafis <p>J3C218189</p></h4>
             </div>
           </div>
         </div>

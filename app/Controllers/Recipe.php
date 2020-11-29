@@ -231,10 +231,10 @@ class Recipe extends BaseController
 			'komentar' => ['rules'=>'required',
 						'errors'=>[ 'required'=> 'Komentar Harus diisi']
 					   ],
-			/*gambar' =>['rules'=>'is_image[gambar]|mime_in[gambar,image/jpg,image/jpeg,image/png]',
+			'gambar' =>['rules'=>'is_image[gambar]|mime_in[gambar,image/jpg,image/jpeg,image/png]',
 							   'errors'=>[ 'is_image'	=> 'File harus berupa gambar',
 											'mime_in'	=> 'File berformat jpg/jpeg/png']
-							 ],*/
+							 ],
 
 
 		])) {
