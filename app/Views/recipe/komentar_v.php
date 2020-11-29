@@ -20,10 +20,17 @@
   <?php endforeach;?>
   <?php if(session()->get('logged_in')==TRUE)  { ?>
     <div class="col-md-12 col-lg-12 mt-1 btn-isi-komen p-2">
-      <form method="post">
+      <form method="post" action="/recipe/komentarSave/<?=$resep['id_resep']?>" enctype="multipart/form-data">
         <?= csrf_field() ?>
-            <textarea class="form-control " id="tutorial" name="tutorial" rows="3" placeholder="Masukkan Cara memasak"><?= old('tutorial')?></textarea>
-  </div>
+            <textarea class="form-control <?= ($validation->hasError('komentar')) ? 'is-invalid' : '' ;?>" id="komentar" name="komentar" rows="3" placeholder="Masukkan komentar anda"><?= old('komentar')?></textarea>
+            <div class="invalid-feedback">
+                <?=$validation->getError('komentar');?>
+            </div>
+            <input type="hidden" name="id_user" value="<?=session()->get('id_user');?>">
+            <input type="hidden" name="id_resep" value="<?=$resep['id_resep']?>">
+          <button type="submit" class="btn btn-success"> Kirim Komentar </button>
+      </form>
+          </div>
 
    <?php }?>
   

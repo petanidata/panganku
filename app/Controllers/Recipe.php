@@ -36,7 +36,8 @@ class Recipe extends BaseController
 		];
 		$komentar = [
 			'komentar' => $this->komentarModel->getKomentar($id_resep),
-			'resep' => $this->resepModel->getResep($id_resep)
+			'resep' => $this->resepModel->getResep($id_resep),
+			'validation' =>  \Config\Services::validation(),
 		];
 		//dd($data);
 		//dd($komentar);
@@ -188,7 +189,7 @@ class Recipe extends BaseController
 ///////////////////////////////////////////////////////////////////////
 
 	$tutorial = $this->request->getFileMultiple('gambar_tutorial');
-	d($tutorial);
+	//d($tutorial);
 	if ($tutorial[0]->getName() == "" ) {
 		$namaTutorial = $this->request->getVar('gambar_tutorial_old');
 	} else {
@@ -222,6 +223,45 @@ class Recipe extends BaseController
 		return redirect()->to(base_url('/recipe/'.$id_resep));
 		
 		
+	}
+	public function komentarSave($id_resep)
+	{
+		//  dd($this->request->getVar());
+		if(!$this->validate([
+			'komentar' => ['rules'=>'required',
+						'errors'=>[ 'required'=> 'Komentar Harus diisi']
+					   ],
+			/*gambar' =>['rules'=>'is_image[gambar]|mime_in[gambar,image/jpg,image/jpeg,image/png]',
+							   'errors'=>[ 'is_image'	=> 'File harus berupa gambar',
+											'mime_in'	=> 'File berformat jpg/jpeg/png']
+							 ],*/
+
+
+		])) {
+			// $validation = \Config\Services::validation();
+			// return redirect()->to(base_url('/recipe/create'))->withInput()->with('validation',$validation);
+			return redirect()->to(base_url('/recipe/detail/'.$id_resep))->withInput();
+		}
+		// ambil gambar
+		$fileGambar = $this->request->getFile('gambar');
+		$namaGambar = "";
+		if (!$fileGambar == null) {
+		$namaGambar = $fileGambar->getRandomName();
+		$fileGambar->move('img/recipe/komen', $namaKomen);
+		}
+
+		$this->komentarModel->save([
+			'id_user' 		=> $this->request->getVar('id_user'),
+			'id_resep' 		=> $this->request->getVar('id_resep'),
+			'komentar' 		=> $this->request->getVar('komentar'),
+			'waktu_komen'	=> date("d/m/Y h:i:s"),
+			'gambar' => $namaGambar,
+				
+		]);
+		
+		session()->setFlashdata('pesan', 'Komentar Berhasil Ditambahkan.');
+		return redirect()->to(base_url('/recipe/detail/'.$id_resep));
+	
 	}
 
 	//--------------------------------------------------------------------
