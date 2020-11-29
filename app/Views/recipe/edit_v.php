@@ -8,10 +8,9 @@
     <div class="w-100">
     <form action="/recipe/update/<?= $resep['id_resep'];?>" method="post" enctype="multipart/form-data">
     <?= csrf_field(); ?>
-<input type="hidden" class="form-control" id="id_user" name="id_user" value="<?= $resep['id_user'];?>">
+    <input type="hidden" class="form-control" id="id_resep" name="id_resep" value="<?= $resep['id_resep'];?>">
         <div class="form-group row">
             <label for="judul" class="col-sm-2" >Nama Makanan</label>
-            
             <div class="col-sm-10">
                 <input type="text" class="form-control <?= ($validation->hasError('judul')) ? 'is-invalid' : '' ;?>" id="judul" name="judul" placeholder="masukan judul masakan anda disini" autofocus value="<?= $resep['judul']?>">
                 <div class="invalid-feedback">

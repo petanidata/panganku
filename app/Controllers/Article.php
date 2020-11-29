@@ -97,6 +97,56 @@ class Article extends BaseController
 		session()->setFlashdata('pesan', 'Resep Berhasil Dihapus.');
 		return redirect()->to(base_url('/article'));
 	}
+	public function edit($id_artikel)
+	{
+		$title =  ['title' => 'Ubah Article | Panganku'];
+		$data = [
+			'validation' =>  \Config\Services::validation(),
+			'artikel' => $this->artikelModel->getArtikel($id_artikel)
+		];
+		
+			echo view('header_v',$title);
+			echo view('article/edit_v', $data);
+			echo view('footer_v');
+	}
+	public function update($id_artikel)
+	{
+		if(!$this->validate([
+			'judul' => ['rules'=>'required',
+						'errors'=>[ 'required'=> 'Judul Harus diisi']
+					   ],
+			'isi' => ['rules'=>'required',
+						'errors'=>[ 'required'=> 'Isi Artikel Harus diisi']
+			   			],
+			'gambar' =>['rules'=>'is_image[gambar]|mime_in[gambar,image/jpg,image/jpeg,image/png]',
+							   'errors'=>[  'is_image'	=> 'File harus berupa gambar',
+											'mime_in'	=> 'File berformat jpg/jpeg/png']
+							 ],
+
+
+		]))
+		{
+			return redirect()->to(base_url('/article/edit/'.$id_artikel))->withInput();
+		}
+
+		$fileArtikel = $this->request->getFile('gambar');
+		if ($fileArtikel->getError() == 4){
+			$namaArtikel = $fileArtikel->getRandomName();
+			$namaBanner = $this->request->getVar('gambar_old');
+		}
+		else {
+			$namaArtikel = $fileArtikel->getRandomName();
+		$fileArtikel->move('img/article', $namaArtikel);
+		}
+		$this->artikelModel->save([
+			'id_artikel'	=> $id_artikel,
+			'judul' 		=> $this->request->getVar('judul'),
+			'isi' 			=> $this->request->getVar('isi'),
+			'gambar' 		=> $namaArtikel				
+		]);
+		
+		return redirect()->to(base_url('article/detail/'.$id_artikel));
+	}
 
 	//--------------------------------------------------------------------
 

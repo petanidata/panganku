@@ -12,7 +12,7 @@
               <div class="shadow mb-5 bg-white rounded" style="width: 24rem;">
                 <div class="card" style="width: 24rem;">
                   <div class="card-body">
-                    <h3 class="card-title text-center" style="padding-top: auto; margin-bottom: 10px;">Daftar Pengguna</h3>
+                    <h3 class="card-title text-center" style="padding-top: auto; margin-bottom: 10px;">Daftar Admin</h3>
                     <form action="/user/addUser" method="post" enctype="multipart/form-data">
                         <?= csrf_field(); ?>
                         <input type="hidden" name="is_admin" value="<?= $is_admin?>">

@@ -30,9 +30,9 @@
         <div class="card w-100">
             <img src="<?= base_url('img/article/'.$a['gambar']); ?>" alt="artikel<?= $i++; ?>" width="100%">
               <h4><?= $a['judul']; ?></h4> 
-              <h5><div class="w-100"><?php echo substr($a['isi'],0,99); ?></div></h5>
+              <h5><div class="w-100"><?php echo nl2br(substr($a['isi'],0,99)); ?></div></h5>
               
-                 <a href="/article/<?= $a['id_artikel']?>" class="w-100 btn btn-success align-self-center">Baca Selengkapnya</a>
+                 <a href="/article/<?= $a['id_artikel'];?>" class="w-100 btn btn-success align-self-center">Baca Selengkapnya</a>
                 
           </div>
         </a>

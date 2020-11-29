@@ -56,10 +56,25 @@ class User extends BaseController
 			'title' => 'Register | Panganku'
 		];
 		$data = [
-			'validation' =>  \Config\Services::validation()
+			'validation' =>  \Config\Services::validation(),
+			'is_admin' => 'N'
 		];
 		echo view('header_v',$title);
 		echo view('user/register_v',$data);
+		echo view('footer_v');
+	}
+
+	public function registerAdmin()
+	{
+		$title = [
+			'title' => 'Register | Panganku'
+		];
+		$data = [
+			'validation' =>  \Config\Services::validation(),
+			'is_admin' => 'Y'
+		];
+		echo view('header_v',$title);
+		echo view('user/register_admin_v',$data);
 		echo view('footer_v');
 	}
 	public function addUser()
@@ -113,7 +128,7 @@ class User extends BaseController
 			'alamat' 		=> $this->request->getVar('alamat'),
 			'jenis_kelamin' => $this->request->getVar('jenis_kelamin'),
 			'bio' 			=> $this->request->getVar('bio'),
-			'is_admin'		=> "N"
+			'is_admin'		=> $this->request->getVar('is_admin'),
 			'gambar_profile' => $namaProfile				
 		]);
 		session()->setFlashdata('pesan', 'User Berhasil Ditambahkan.');

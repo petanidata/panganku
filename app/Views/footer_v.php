@@ -10,7 +10,7 @@
           <div class="footer-logo">
 
             <a class="navbar-brand" href="#">Panganku</a>
-            <p>Update berita terbaru mengenai <a href="https://www.pertanian.go.id/"><b>Diversifikasi Pangan Bersama </b></a>Kami</p>
+            <p>Update berita terbaru mengenai <a href="https://www.pertanian.go.id/"><b>Diversifikasi Pangan Bersama </b><a href="<?php echo base_url('registerAdmin'); ?>" >Kami</a></p>
 
           </div>
         </div>

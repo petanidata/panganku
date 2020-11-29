@@ -32,7 +32,7 @@
             
           </div>
           <div class="feature-block w-100 justify">
-          <?=$artikeluser['isi'];?>
+          <?=nl2br($artikeluser['isi']);?>
             
           </div>
           

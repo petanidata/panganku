@@ -45,6 +45,7 @@ $routes->get('/article/(:segment)','Article::detail/$1');
 $routes->get('/login','User::login');
 $routes->get('/logout','User::logout');
 $routes->get('/register','User::register');
+$routes->get('/registerAdmin','User::registerAdmin');
 
 
 
