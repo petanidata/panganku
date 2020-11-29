@@ -1,7 +1,7 @@
 <section>
 <div class="container">
   <div class="row text-left align-self-left">
-  <div class="col-md-12 col-lg-12 btn-komen mt-4"> Komentar</div>
+  <div class="col-md-12 col-lg-12 btn-komen mt-4 text-center"> Komentar</div>
   <?php foreach($komentar as $k):?>
     <div class="col-md-12 col-lg-12 btn-isi-komen mt-1">
         <div class="d-flex">
@@ -19,11 +19,11 @@
     </div>
   <?php endforeach;?>
   <?php if(session()->get('logged_in')==TRUE)  { ?>
-  
+    <div class="col-md-12 col-lg-12 mt-1 btn-isi-komen p-2">
       <form method="post">
         <?= csrf_field() ?>
-            <textarea class="form-control w-100" id="tutorial" name="tutorial" rows="3" placeholder="Masukkan Cara memasak"><?= old('tutorial')?></textarea>
-      </form>
+            <textarea class="form-control " id="tutorial" name="tutorial" rows="3" placeholder="Masukkan Cara memasak"><?= old('tutorial')?></textarea>
+  </div>
 
    <?php }?>
   
