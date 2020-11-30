@@ -271,10 +271,12 @@ class Recipe extends BaseController
 	public function komentarDelete($id_komentar)
 	{
 		$id_resep = $this->request->getVar('id_resep');
+		// dd($id_resep);
 		$this->komentarModel->delete($id_komentar);
 		session()->setFlashdata('pesan', 'Komentar Berhasil Dihapus.');
-		return redirect()->to(base_url('/recipe/detail/'.$id_resep));
+		return redirect()->to(base_url('/recipe/'.$id_resep));
 	}
+
 	public function komentarEdit($id_komentar)
 	{
 		$id_resep = $this->request->getVar('id_resep');
@@ -283,11 +285,8 @@ class Recipe extends BaseController
 			'validation' =>  \Config\Services::validation(),
 			'komentarresep' => $this->komentarModel->getKomentar($id_resep),
 			'komentar' => $this->komentarModel->getKomentarbyid($id_komentar),
-			 
-			
+
 		];
-		
-		
 		echo view('header_v',$title);
 		echo view('/recipe/edit_komentar_v', $data);
 		echo view('footer_v');

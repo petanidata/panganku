@@ -11,7 +11,7 @@ class ArtikelModel extends Model
     public function getArtikelUser($id_artikel = false)
     {
      if ($id_artikel == false){
-         return $this->join('user','user.id_user=artikel.id_user');
+         return $this->join('user','user.id_user=artikel.id_user')->findAll();
      } 
      return $this->join('user','user.id_user=artikel.id_user')->where('id_artikel',$id_artikel)->first();
     }

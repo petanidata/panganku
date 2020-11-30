@@ -11,11 +11,17 @@ class ResepModel extends Model
     public function getResep($id_resep = false)
     {
      if ($id_resep == false){
-         return $this->join('user','user.id_user=resep.id_user')
-         ->get()->getResultArray();
+         return $this->join('user','user.id_user=resep.id_user')->findAll();
     }
-    return $this->join('user','user.id_user=resep.id_user')
-    ->where(['id_resep' => $id_resep])->first();
+    return $this->join('user','user.id_user=resep.id_user')->where(['id_resep' => $id_resep])->first();
     }
 
 }
+// public function getKomentar($id_resep = false)
+// {
+//     if ($id_resep == false){
+//         return $this->join('user','user.id_user=komentar.id_user')->findAll();
+//    }
+//    //return $this->Where(['id_komentar' => $id_komentar])->first()
+//     return $this->join('user','user.id_user=komentar.id_user')->getWhere(['id_resep' => $id_resep])->getResultArray();
+// }

@@ -27,6 +27,7 @@
 
   <!-- Main Stylesheet File -->
   <link href="<?php echo base_url('css/style.css'); ?>" rel="stylesheet">
+  <link href="<?php echo base_url('css/simple-sidebar.css'); ?>" rel="stylesheet">
 
 </head>
 
@@ -44,9 +45,9 @@
       <nav id="nav-menu-container">
         <ul class="nav-menu">
           <li><a href="<?php echo base_url(); ?>">Home</a></li>
-          <li><a href=<?php echo base_url('recipe'); ?>>Recipe</a></li>
-          <li><a href=<?php echo base_url('article'); ?>>Article</a></li>
-          <li><a href=<?php echo base_url('team'); ?>>Team</a></li>
+          <li><a href="<?php echo base_url('recipe'); ?>">Recipe</a></li>
+          <li><a href="<?php echo base_url('article'); ?>">Article</a></li>
+          <li><a href="<?php echo base_url('team'); ?>">Team</a></li>
           <?php if(session()->get('logged_in')==FALSE) {?>
           <a href="<?php echo base_url('login'); ?>" class="btn-login">Login</a>
           <?php } else { ?>

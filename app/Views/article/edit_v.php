@@ -23,7 +23,7 @@
         <div class="form-group row">
         <label for="isi" class="col-sm-2">Isi</label>
             <div class="col-sm-10">
-            <textarea class="form-control <?= ($validation->hasError('isi')) ? 'is-invalid' : '' ;?>" id="isi" name="isi" rows="5" placeholder="Masukkan Isi Artikel" ><?= old('isi')?> <?= $artikel['isi']?></textarea>
+            <textarea class="form-control <?= ($validation->hasError('isi')) ? 'is-invalid' : '' ;?>" id="isi" name="isi" rows="5" placeholder="Masukkan Isi Artikel" ><?= old('isi')?><?=$artikel['isi']?></textarea>
             <div class="invalid-feedback">
                     <?=$validation->getError('isi');?>
                 </div>

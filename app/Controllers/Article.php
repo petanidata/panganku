@@ -13,7 +13,7 @@ class Article extends BaseController
 		
 		//$artikel = $this->artikelModel->findAll();
 		$data = [
-			'artikel' => $this->artikelModel->getArtikelUser()->findAll()
+			'artikel' => $this->artikelModel->getArtikelUser()
 			
 		];
 		
@@ -108,6 +108,7 @@ class Article extends BaseController
 			echo view('header_v',$title);
 			echo view('article/edit_v', $data);
 			echo view('footer_v');
+			// return redirect()->;
 	}
 	public function update($id_artikel)
 	{
@@ -127,6 +128,7 @@ class Article extends BaseController
 		]))
 		{
 			return redirect()->to(base_url('/article/edit/'.$id_artikel))->withInput();
+			
 		}
 
 		$fileArtikel = $this->request->getFile('gambar');
@@ -146,6 +148,8 @@ class Article extends BaseController
 		]);
 		
 		return redirect()->to(base_url('article/detail/'.$id_artikel));
+		// return redirect();
+		// return redirect()->back()->back()->back()->back()->back();
 	}
 
 	//--------------------------------------------------------------------

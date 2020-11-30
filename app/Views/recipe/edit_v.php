@@ -2,7 +2,7 @@
 
 <div class="container">
   <div class="section-title text-center">
-    <h2><b>Form Tambah Resep</b></h2>
+    <h2><b>Form Edit Resep</b></h2>
   </div>
   <div class="row text-left align-self-left">
     <div class="w-100">
