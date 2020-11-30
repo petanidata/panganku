@@ -101,20 +101,26 @@ class Recipe extends BaseController
 		$fileBanner = $this->request->getFile('gambar_banner');
 		$namaBanner = $fileBanner->getRandomName();
 		$fileBanner->move('img/recipe/', $namaBanner);
+		// d($fileBanner = $this->request->getFile('gambar_banner'));
+		// d($fileBanner->move('img/recipe/', $namaBanner));
+		// dd($namaBanner = $fileBanner->getRandomName());
 		
 		
 		
 		// dd($fileTutorial[0]);
 		//dd($this->request->getFileMultiple('gambar_tutorial'));
 		$tutorial = $this->request->getFileMultiple('gambar_tutorial');
-		$fileTutorial = "";
-		foreach ($tutorial as $t) {
-			$namaTutorial = $t->getRandomName();
-			$t->move('img/recipe/', $namaTutorial);
-			$fileTutorial.=$namaTutorial.',';
+		$namaTutorial = "";
+		if (!$tutorial[0]->getName() == "" ) {
+			foreach ($tutorial as $t) {
+				$namaTutorial = $t->getRandomName();
+				$t->move('img/recipe/', $namaTutorial);
+				$fileTutorial.=$namaTutorial.',';
+			}
+			$namaTutorial = substr($fileTutorial,0,-1);
 		}
 		 
-		$namaTutorial = substr($fileTutorial,0,-1);
+		
 
 		$this->resepModel->save([
 			'id_user' 		=> $this->request->getVar('id_user'),
