@@ -38,11 +38,19 @@
         <div class="col-md-12 col-lg-12">
           <div class="feature-block w-100">
             <img src="<?php echo base_url('/img/recipe/'.$resep['gambar_banner']); ?>" alt="artikel1" width="75%">
+            <br /><br />
+            <H4> Lama memasak </h4>
+            <h5><?php echo $resep['lama_memasak'];?> Menit</h5>
+            <br />
+            <H4> Jumlah porsi </h4>
+            <h5><?php echo $resep['porsi'];?></h5>
+            <br />
             <H4> Bahan - Bahan </h4>
             <h5 ><?= nl2br($resep['bahan']);?></h5>
             <br />
             <H4> Cara memasak </h4>
             <h5><?php echo nl2br($resep['tutorial']);?></h5>
+            
             
           </div>
         </div>

@@ -7,7 +7,7 @@
 
   <section id="features" class="padd-section text-center wow fadeInUp">
     <div class="container">
-    <div class="d-flex">
+      <div class="d-flex">
         <a href="/article" class="btn btn-success"> Kembali ke Halaman Artikel</a>
         <?php if((session()->get('is_admin')=="Y" )) { ?>
         <a href="/article/edit/<?=$artikeluser['id_artikel'];?>" class="btn btn-warning ml-auto mr-2"> Edit Artikel</a>
@@ -17,25 +17,16 @@
           <button type="submit" class="btn btn-danger" > Hapus Artikel </button>
         </form>
         <?php }?>
-
-        
-        
       </div>
       <div class="section-title text-center">
         <h2><b><?=$artikeluser['judul'];?></b></h2>
         <p class="separator"> oleh </p><b><?=$artikeluser['username'];?></b>
       </div>
-      <div class="row text-center align-self-center">
-        <div class="col-md-12 col-lg-12 w-100 h-100">
-          <div class="feature-block w-100">
-            <img src="<?php echo base_url('img/article/'.$artikeluser['gambar'])?>" alt="artikel1" width="75%">
-            
-          </div>
-          <div class="feature-block w-100 justify">
-          <?=nl2br($artikeluser['isi']);?>
-            
-          </div>
-          
+      
+      <img src="<?php echo base_url('img/article/'.$artikeluser['gambar'])?>" alt="artikel1" width="75%">
+      <p class="feature-block text-wrap text-justify" style=’text-align:justify;’>
+           <?=nl2br($artikeluser['isi']);?>
+        </p> 
         </div>
       </div>
     </div>

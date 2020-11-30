@@ -131,12 +131,12 @@ class Article extends BaseController
 
 		$fileArtikel = $this->request->getFile('gambar');
 		if ($fileArtikel->getError() == 4){
-			$namaArtikel = $fileArtikel->getRandomName();
-			$namaBanner = $this->request->getVar('gambar_old');
+			
+			$namaArtikel = $this->request->getVar('gambar_old');
 		}
 		else {
 			$namaArtikel = $fileArtikel->getRandomName();
-		$fileArtikel->move('img/article', $namaArtikel);
+			$fileArtikel->move('img/article', $namaArtikel);
 		}
 		$this->artikelModel->save([
 			'id_artikel'	=> $id_artikel,

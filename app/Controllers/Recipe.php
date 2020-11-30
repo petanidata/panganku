@@ -194,6 +194,7 @@ class Recipe extends BaseController
 ///////////////////////////////////////////////////////////////////////
 
 	$tutorial = $this->request->getFileMultiple('gambar_tutorial');
+	$namaTutorial = "";
 	//d($tutorial);
 	if ($tutorial[0]->getName() == "" ) {
 		$namaTutorial = $this->request->getVar('gambar_tutorial_old');
@@ -215,7 +216,6 @@ class Recipe extends BaseController
 
 		$this->resepModel->save([
 			'id_resep' => $id_resep,
-			'id_user' => $this->request->getVar('id_user'),
 			'judul' => $this->request->getVar('judul'),
 			'porsi' => $this->request->getVar('porsi'),
 			'lama_memasak' => $this->request->getVar('lama_memasak'),
