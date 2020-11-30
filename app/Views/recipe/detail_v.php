@@ -49,11 +49,14 @@
         <div class="col-md-12 col-lg-12 mt-2">
           <H4> Gambar Tutorial </h4>
         </div>
-        <?php $i=1; $tutorial = explode(",",$resep['gambar_tutorial']);foreach ($tutorial as $t) { ?>
+        
+        <?php if ($resep['gambar_tutorial'] != "") {
+           $i=1; $tutorial = explode(",",$resep['gambar_tutorial']);foreach ($tutorial as $t) { ?>
           <div class="col-md-3 col-lg-3 w-100 my-2">
           <img src="<?php echo base_url('img/recipe/'.$t); ?>" alt="img<?= $i++; ?>" width="100%" >
           </div>
-        <?php } ?> 
+        <?php }} ?> 
+
       </div>
     </div>
   </section>
