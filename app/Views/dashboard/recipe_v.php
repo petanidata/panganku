@@ -36,7 +36,7 @@
           <img src="<?php echo base_url('img/recipe/'.$r['gambar_banner']); ?>" width=100px> 
         <?php } else {echo "<p>gambar tidak ada</p>";}?>
       </th>
-      <th scope="col"> <?php echo date('d-m-Y H:i:s', strtotime( $r['created_at']));?></th>
+      <th scope="col"> <?=$r['created_at'];?></th>
       <th scope="col" class="d-flex">
         <a href="/recipe/dashboardEdit/<?=$r['id_resep'];?>" ><button class="mr-1"><i class="fa fa-pencil-square-o" ></i></button></a>
         <a href="/recipe/dashboardDelete/<?=$r['id_resep'];?>" ><button><i class="fa fa-trash-o" ></i></button></a>

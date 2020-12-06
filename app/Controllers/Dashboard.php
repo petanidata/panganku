@@ -3,6 +3,7 @@ use App\Models\ResepModel;
 use App\Models\KomentarModel;
 use App\Models\ArtikelModel;
 use App\Models\UserModel;
+use CodeIgniter\I18n\Time;
 use CodeIgniter\Exceptions\PageNotFoundException;
 class Dashboard extends BaseController
 {
@@ -59,7 +60,8 @@ class Dashboard extends BaseController
 			
         ];
         $data = [
-            'resep' => $this->resepModel->getResep()
+            'resep' => $this->resepModel->getResep(),
+            'tgl' => new Time('now', 'America/Chicago', 'en_US')
             
         ];
         // d($data);
