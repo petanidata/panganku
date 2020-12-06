@@ -48,10 +48,15 @@ class Article extends BaseController
 			//'artikel' => $this->artikelModel->getArtikel()
 		];
 		
+		if(session()->get('is_admin')=="Y"){
 			echo view('header_v',$title);
 			echo view('article/create_v', $data);
 			echo view('footer_v');
-		
+			}
+			else {
+				session()->setFlashdata('pesan', 'Anda harus login sebagai admin');
+					return redirect()->to(base_url('/login'));
+			}
 	}
 	public function save()
 	{
@@ -93,10 +98,30 @@ class Article extends BaseController
 	}
 	public function delete($id_artikel)
 	{
+		if(session()->get('is_admin')=="Y"){
+			$this->artikelModel->delete($id_artikel);
+			session()->setFlashdata('pesan', 'Resep Berhasil Dihapus.');
+			return redirect()->to(base_url('/article'));
+		}
+		else {
+			session()->setFlashdata('pesan', 'Anda harus login sebagai admin');
+				return redirect()->to(base_url('/login'));
+		}
+	}
+
+	public function dashboardDelete($id_artikel)
+	{
+		if(session()->get('is_admin')=="Y"){
 		$this->artikelModel->delete($id_artikel);
 		session()->setFlashdata('pesan', 'Resep Berhasil Dihapus.');
-		return redirect()->to(base_url('/article'));
+		return redirect()->to(base_url('/dashboard/artikel'));
+		}
+		else {
+			session()->setFlashdata('pesan', 'Anda harus login sebagai admin');
+				return redirect()->to(base_url('/login'));
+		}
 	}
+
 	public function edit($id_artikel)
 	{
 		$title =  ['title' => 'Ubah Article | Panganku'];
@@ -105,9 +130,15 @@ class Article extends BaseController
 			'artikel' => $this->artikelModel->getArtikel($id_artikel)
 		];
 		
+		if(session()->get('is_admin')=="Y"){
 			echo view('header_v',$title);
 			echo view('article/edit_v', $data);
 			echo view('footer_v');
+			}
+			else {
+				session()->setFlashdata('pesan', 'Anda harus login sebagai admin');
+					return redirect()->to(base_url('/login'));
+			}
 			// return redirect()->;
 	}
 	public function update($id_artikel)
@@ -123,17 +154,13 @@ class Article extends BaseController
 							   'errors'=>[  'is_image'	=> 'File harus berupa gambar',
 											'mime_in'	=> 'File berformat jpg/jpeg/png']
 							 ],
-
-
 		]))
 		{
 			return redirect()->to(base_url('/article/edit/'.$id_artikel))->withInput();
-			
 		}
 
 		$fileArtikel = $this->request->getFile('gambar');
 		if ($fileArtikel->getError() == 4){
-			
 			$namaArtikel = $this->request->getVar('gambar_old');
 		}
 		else {
@@ -146,12 +173,66 @@ class Article extends BaseController
 			'isi' 			=> $this->request->getVar('isi'),
 			'gambar' 		=> $namaArtikel				
 		]);
-		
 		return redirect()->to(base_url('article/detail/'.$id_artikel));
 		// return redirect();
 		// return redirect()->back()->back()->back()->back()->back();
 	}
+	public function dashboardEdit($id_artikel)
+	{
+		$title =  ['title' => 'Ubah Article | Panganku'];
+		$data = [
+			'validation' =>  \Config\Services::validation(),
+			'artikel' => $this->artikelModel->getArtikel($id_artikel)
+		];
+		
+		if(session()->get('is_admin')=="Y"){
+			echo view('header_v',$title);
+			echo view('article/dashboardedit_v', $data);
+			echo view('footer_v');
+			}
+			else {
+				session()->setFlashdata('pesan', 'Anda harus login sebagai admin');
+					return redirect()->to(base_url('/login'));
+			}
+			// return redirect()->;
+	}
+	public function dashboardUpdate($id_artikel)
+	{
+		if(!$this->validate([
+			'judul' => ['rules'=>'required',
+						'errors'=>[ 'required'=> 'Judul Harus diisi']
+					   ],
+			'isi' => ['rules'=>'required',
+						'errors'=>[ 'required'=> 'Isi Artikel Harus diisi']
+			   			],
+			'gambar' =>['rules'=>'is_image[gambar]|mime_in[gambar,image/jpg,image/jpeg,image/png]',
+							   'errors'=>[  'is_image'	=> 'File harus berupa gambar',
+											'mime_in'	=> 'File berformat jpg/jpeg/png']
+							 ],
+		]))
+		{
+			return redirect()->to(base_url('/article/dashboardEdit/'.$id_artikel))->withInput();
+		}
 
+		$fileArtikel = $this->request->getFile('gambar');
+		if ($fileArtikel->getError() == 4){
+			$namaArtikel = $this->request->getVar('gambar_old');
+		}
+		else {
+			$namaArtikel = $fileArtikel->getRandomName();
+			$fileArtikel->move('img/article', $namaArtikel);
+		}
+		$this->artikelModel->save([
+			'id_artikel'	=> $id_artikel,
+			'judul' 		=> $this->request->getVar('judul'),
+			'isi' 			=> $this->request->getVar('isi'),
+			'gambar' 		=> $namaArtikel				
+		]);
+		return redirect()->to(base_url('/dashboard/artikel'));
+		// return redirect();
+		// return redirect()->back()->back()->back()->back()->back();
+	}
+	
 	//--------------------------------------------------------------------
 
 }

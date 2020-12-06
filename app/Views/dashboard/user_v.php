@@ -4,6 +4,9 @@
 <br> 
 <br/>
 <div class="container">
+<div class="section-title text-right">
+  <a href="<?= base_url('registerAdmin');?>" class="btn btn-success"> Tambah Admin </a>
+</div>
 <div class="table-responsive">
 <table class="table">
   <thead class="thead-dark">

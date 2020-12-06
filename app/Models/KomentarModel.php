@@ -6,6 +6,8 @@ class KomentarModel extends Model
 {
     protected $table      = 'komentar';
     protected $primaryKey = 'id_komentar';
+    protected $createdField  = 'created_at';
+    protected $updatedField  = 'updated_at';
     protected $useTimestamps = true;
     protected $allowedFields = ['id_user','id_resep','komentar','gambar'];
     public function getKomentarbyid($id_komentar = false)

@@ -14,17 +14,18 @@ class Dashboard extends BaseController
         $this->userModel = new UserModel();
         $this->artikelModel = new ArtikelModel();
 	}
-	// public function index()
-	// {
-    //     $title = [
-	// 		'title' => 'Dashboard Admin | Panganku'
+	public function index()
+	{
+        $title = [
+			'title' => 'Dashboard Admin | Panganku'
 			
-	// 	];
-	// 	echo view('header_v',$title);
-    //     echo view('/dashboard/index_v');
-    //     //echo ("</div>");
-	// 	echo view('footer_v');
-	// }
+		];
+        echo view('header_v',$title);
+        echo view('sidebar_v');
+        //echo view('/dashboard/index_v');
+        echo ("</div>");
+		echo view('footer_v');
+	}
 
     public function artikel()
 	{
@@ -37,12 +38,18 @@ class Dashboard extends BaseController
             'artikel' => $this->artikelModel->getArtikelUser()
         ];
         //  dd($data);
+        if(session()->get('is_admin')=="Y"){
         echo view('header_v',$title);
         echo view('sidebar_v');
         echo view('/dashboard/article_v',$data);
         // d($data);
         echo ("</div>");
-		echo view('footer_v');
+        echo view('footer_v');
+            }
+            else {
+                session()->setFlashdata('pesan', 'Anda harus login sebagai admin');
+                return redirect()->to(base_url('/login'));
+            }
     }
 
     public function resep()
@@ -56,12 +63,19 @@ class Dashboard extends BaseController
             
         ];
         // d($data);
+        if(session()->get('is_admin')=="Y"){
         echo view('header_v',$title);
         echo view('sidebar_v');
         echo view('/dashboard/recipe_v',$data);
         // d($data);
         echo ("</div>");
-		echo view('footer_v');
+        echo view('footer_v');
+
+            }
+            else {
+                session()->setFlashdata('pesan', 'Anda harus login sebagai admin');
+                return redirect()->to(base_url('/login'));
+            }
     }
     public function user()
 	{
@@ -74,12 +88,19 @@ class Dashboard extends BaseController
             
         ];
         //  dd($data);
+        if(session()->get('is_admin')=="Y"){
+        
         echo view('header_v',$title);
         echo view('sidebar_v');
         echo view('/dashboard/user_v',$data);
         // d($data);
         echo ("</div>");
-		echo view('footer_v');
+        echo view('footer_v');
+        }
+        else {
+            session()->setFlashdata('pesan', 'Anda harus login sebagai admin');
+            return redirect()->to(base_url('/login'));
+        }
     }
 
     public function komentar($id_komentar = false)
@@ -94,12 +115,18 @@ class Dashboard extends BaseController
         ];
         //  dd($this->komentarModel->getKomentar());
     //    dd($this->komentarModel->getKomentarUserResep());
-        // dd($data);
+    // dd($data);
+        if(session()->get('is_admin')=="Y"){
         echo view('header_v',$title);
         echo view('sidebar_v');
         echo view('/dashboard/komentar_v',$data);
         echo ("</div>");
-		echo view('footer_v');
+        echo view('footer_v');
+            }
+            else {
+                session()->setFlashdata('pesan', 'Anda harus login sebagai admin');
+                return redirect()->to(base_url('/login'));
+            }
 	}
 
 }

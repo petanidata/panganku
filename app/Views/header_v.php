@@ -48,6 +48,9 @@
           <li><a href="<?php echo base_url('recipe'); ?>">Recipe</a></li>
           <li><a href="<?php echo base_url('article'); ?>">Article</a></li>
           <li><a href="<?php echo base_url('team'); ?>">Team</a></li>
+          <?php if(session()->get('is_admin')=="Y") {?>
+          <a href="<?php echo base_url('dashboard'); ?>" class="btn-login">Dashboard</a>
+          <?php } ?>
           <?php if(session()->get('logged_in')==FALSE) {?>
           <a href="<?php echo base_url('login'); ?>" class="btn-login">Login</a>
           <?php } else { ?>

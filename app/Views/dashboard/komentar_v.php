@@ -31,7 +31,7 @@
       <th scope="col"><?=$k['created_at']; ?></th>
       <th scope="col"><a href="<?= base_url('recipe/'.$k['id_resep'])?>" > <?= nl2br(substr($k['judul'],0,25)); ?></a></th>
       <th scope="col">              
-        <form method="post" action="/recipe/komentarDelete/<?=$k['id_komentar']?>" class="inline">
+        <form method="post" action="/recipe/dashboardKomentarDelete/<?=$k['id_komentar']?>" class="inline">
                 <input type="hidden" name="id_resep" value="<?=$k['id_resep']?>">
                 <button><i class="fa fa-trash-o"></i></button>      
         </form>

@@ -4,6 +4,9 @@
 <br> 
 <br/>
 <div class="container">
+<div class="section-title text-right">
+  <a href="<?= base_url('article/create');?>" class="btn btn-success"> Tambah Artikel </a>
+</div>
 <div class="table-responsive">
 <table class="table">
   <thead class="thead-dark">
@@ -30,8 +33,8 @@
       </th>
       <th scope="col">
 
-      <a href="/article/edit/<?=$a['id_artikel'];?>" ><button><i class="fa fa-pencil-square-o" ></i></button></a>
-      <a href="/article/delete/<?=$a['id_artikel'];?>" ><button><i class="fa fa-trash-o" ></i></button></a>
+      <a href="/article/dashboardEdit/<?=$a['id_artikel'];?>" ><button><i class="fa fa-pencil-square-o" ></i></button></a>
+      <a href="/article/dashboardDelete/<?=$a['id_artikel'];?>" ><button><i class="fa fa-trash-o" ></i></button></a>
       </th>
     </tr>
   <?php }?>
