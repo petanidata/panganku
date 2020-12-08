@@ -11,18 +11,17 @@
         <div class="shadow mb-5 bg-white rounded" style="width: 24rem;">
           <div class="card" style="width: 24rem;">
             <div class="card-body">
-              <h3 class="card-title text-center" style="padding-top: auto;">Login Pengguna</h3>
+              <h3 class="card-title text-center" style="padding-top: auto;">Login</h3>
               <div class="container">
+
         <div class="section-title text-center">
-            
             <?php if(session()->getFlashData('pesan')) :?>
-              <div class="alert alert-primary" role="alert">
+              <div class="alert alert-danger" role="alert">
                 <?= session()->getFlashData('pesan') ?>
               </div>
             <?php endif;?>
         </div>
     </div>
-              <br>
               
               <form method="post" action="/user/auth" >
               <?= csrf_field(); ?>

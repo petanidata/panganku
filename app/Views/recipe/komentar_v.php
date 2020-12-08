@@ -6,7 +6,7 @@
     <div class="col-md-12 col-lg-12 btn-isi-komen mt-1">
         <div class="d-flex inline">
           <div class="ml-0 mr-auto">
-            <b><?=$k['username'];?></b> pada <?php echo date_format(date_create($k['created_at']), 'H:i d-m-Y');?>
+            <b><?=$k['username'];?></b> pada <?php echo($k['created_at']);?>
           </div>
           <?php if((session()->get('id_user')==$k['id_user']) or (session()->get('is_admin')=="Y" ) or (session()->get('id_user')==$resep['id_user']) )  { ?>
           <div class="" >

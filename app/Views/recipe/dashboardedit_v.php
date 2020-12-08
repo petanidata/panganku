@@ -6,7 +6,7 @@
   </div>
   <div class="row text-left align-self-left">
     <div class="w-100">
-    <form action="/recipe/update/<?= $resep['id_resep'];?>" method="post" enctype="multipart/form-data">
+    <form action="/recipe/dashboardUpdate/<?= $resep['id_resep'];?>" method="post" enctype="multipart/form-data">
     <?= csrf_field(); ?>
     <input type="hidden" class="form-control" id="id_resep" name="id_resep" value="<?= $resep['id_resep'];?>">
         <div class="form-group row">
@@ -85,7 +85,7 @@
         </div>
         <div class="text-center">
         <button type="submit" class="btn btn-success" >Ubah Resep</button>
-        <a href="<?=base_url('/recipe/'.$resep['id_resep']);?>"  class="btn btn-primary" >Batal Simpan</a>
+        <a href="<?=base_url('dashboard/resep');?>"  class="btn btn-primary" >Batal Simpan</a>
         </div>
         </form>
     </div>

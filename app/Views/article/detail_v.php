@@ -18,15 +18,16 @@
         </form>
         <?php }?>
       </div>
-      <div class="section-title text-center">
+
+      <div class="card d-flex" style="border: none">
         <h2><b><?=$artikeluser['judul'];?></b></h2>
-        <p class="separator"> oleh </p><b><?=$artikeluser['username'];?></b>
-      </div>
-      
-      <img src="<?php echo base_url('img/article/'.$artikeluser['gambar'])?>" alt="artikel1" width="75%">
-      <p class="feature-block text-wrap text-justify" style=’text-align:justify;’>
-           <?=nl2br($artikeluser['isi']);?>
-        </p> 
+        <h4 class="separator"> oleh <br/>
+        <b><?=$artikeluser['username'];?></b></h4><br/>
+        <div>
+        <img src="<?php echo base_url('img/article/'.$artikeluser['gambar'])?>" alt="gambar_artikel" width="75%">
+        </div>
+        <div class="justify">
+         <?=nl2br($artikeluser['isi']);?>
         </div>
       </div>
     </div>

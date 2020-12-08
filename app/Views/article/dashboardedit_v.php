@@ -6,7 +6,7 @@
   </div>
   <div class="row text-left align-self-left">
     <div class="w-100">
-    <form action="/article/update/<?= $artikel['id_artikel']?>" method="post" enctype="multipart/form-data">
+    <form action="/article/dashboardUpdate/<?= $artikel['id_artikel']?>" method="post" enctype="multipart/form-data">
     <?= csrf_field(); ?>
 <!-- user sementara-->    
 <input type="hidden" class="form-control" id="id_artikel" name="id_artikel" value="<?= $artikel['id_artikel']?>">
@@ -23,7 +23,7 @@
         <div class="form-group row">
         <label for="isi" class="col-sm-2">Isi</label>
             <div class="col-sm-10">
-            <textarea class="form-control <?= ($validation->hasError('isi')) ? 'is-invalid' : '' ;?>" id="isi" name="isi" rows="5" placeholder="Masukkan Isi Artikel" ><?= old('isi')?><?=$artikel['isi']?></textarea>
+            <textarea class="form-control <?= ($validation->hasError('isi')) ? 'is-invalid' : '' ;?>" id="isi" name="isi" rows="5" placeholder="Masukkan Isi Artikel"><?= old('isi')?><?=$artikel['isi']?></textarea>
             <div class="invalid-feedback">
                     <?=$validation->getError('isi');?>
                 </div>
@@ -45,7 +45,7 @@
 
         <div class="text-center">
         <button type="submit" class="btn btn-success" >Simpan Artikel</button>
-        <a href="<?=base_url('/article/'.$artikel['id_artikel']);?>"  class="btn btn-primary">Kembali</a>
+        <a href="<?=base_url('/dashboard/artikel');?>"  class="btn btn-primary">Kembali</a>
         </div>
         </form>
     </div>
